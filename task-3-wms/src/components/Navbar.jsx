@@ -1,0 +1,63 @@
+import React from 'react'
+import Button from './Button'
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+
+const Navbar = () => {
+    
+    const router = useRouter();
+    // const handleClick = () => {
+    //     router.push('/');
+    // }
+
+    const buttons = [
+        { name: "Dashboard", imageSrc: null, isDropdown: false },
+        {
+            name: "Masters",
+            imageSrc: null,
+            isDropdown: true,
+            dropdownItems: [
+                { name: "Product Master" },
+                { name: "Product Request" },
+            ],
+        },
+        { name: "Settings", imageSrc: null, isDropdown: false },
+        
+    ];
+
+
+    const handleButtonClick = (name) => {
+        console.log(`${name} clicked!`);
+
+    };
+
+    const handleDropdownClick = (name) => {
+        if (name === "Product Master") {
+            router.push('/product-master');
+            // <Link href="/product-master">
+                
+            // </Link>
+        }
+
+    };
+
+
+    return (
+        <div className="flex bg-white p-3 shadow-lg mb-4">
+            <div className="flex  space-x-4 ml-16"> 
+                {buttons.map((button, index) => (
+                    <Button
+                        key={index}
+                        name={button.name}
+                        onClick={button.isDropdown ? handleDropdownClick : () => button.onclick}
+                        imageSrc={button.imageSrc}
+                        isDropdown={button.isDropdown}
+                        dropdownItems={button.dropdownItems}
+                    />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export default Navbar

@@ -1,0 +1,148 @@
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    // background-color: #ffffff;
+    background: linear-gradient(135deg, #67b7f5, #4d91e5);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        font-size: 30px;
+        color: black;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .label {
+        color: black;
+        text-align: left;
+        font-size: 20px;
+        margin-bottom: 10px;
+
+    }
+
+    .label:hover {
+        color: rgb(104, 91, 91);
+    }
+
+    .input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+        height: 250px;
+        white-space: pre-wrap;
+    }
+
+    .errorDiv {
+        height: auto;
+        width: 100%;
+
+        .errorH3 {
+            color: red;
+        }
+    }
+
+    .buttons {
+
+        display: flex;
+        flex-direction: column;
+
+
+    }
+
+
+    .parseButton {
+        width: 20%;
+        background-color: rgb(44, 44, 44);
+        color: white;
+        padding: 5px 20px;
+        cursor: pointer;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 10px;
+
+        &:hover {
+            background-color: black;
+        }
+    }
+
+
+    .resultHeader {
+
+        font-size: 20px;
+        font-weight: 500;
+        text-align: left;
+        margin: 0px;
+        margin-bottom: 10px;
+    }
+
+    .resultContainer {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        height: 250px;
+        overflow-y: auto;
+        overflow-x: auto;
+        background-color: #ffffff;
+
+    }
+
+    .jsonOutput {
+        margin-left: 0;
+        text-align: left;
+        padding: 10px;
+        white-space: pre-wrap;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1rem;
+        line-height: 1.5;
+
+
+        .innerDiv {
+            margin-left: 20px;
+
+            .toggleButton {
+                background-color: gray;
+                color: black;
+                border: none;
+                // padding: 8px 12px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 10px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 4px;
+                transition: background-color 0.3s, transform 0.3s;
+            }
+
+            .toggleButton:hover {
+                background-color: black;
+                color: white;
+                transform: scale(1.05);
+            }
+
+
+
+            .toggleButton:active {
+                transform: scale(0.95);
+            }
+
+        }
+    }
+
+    .span {
+        margin-left: 0px;
+
+    }
+}
