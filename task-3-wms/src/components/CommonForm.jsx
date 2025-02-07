@@ -65,6 +65,41 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
 
           <div className='mb-10'>
 
+          {/* {
+        JSONData?.map((data,index)=>{
+          // if(data?.fieldType === "input"){
+            return (
+              <div key={"input"+index} className='flex items-center'>
+                  <div className='label'>{data?.label}</div>
+                  <div className='input-container'>
+                    {
+
+                      (data?.fieldType === "input") ? 
+                        
+                        <input
+                        className='text-black'
+                        id={data?.fieldKey}
+                        value={fieldData[data?.fieldKey]}
+                        onChange={(e)=>{ onChangeInput(e,data)}}
+                        />
+                      : (data?.fieldType === "select") ?
+                        <select onChange={(e)=>{ onChangeInput(e,data)}} value={fieldData[data?.fieldKey]}>
+                          {formData12[data?.fieldKey]?.map((option)=>{
+                            return(
+                            <option value={`${data?.optionValue ? option[data?.optionValue] : option}`}>{data?.optionLabel? option[data?.optionLabel] : option}</option>
+                            )
+                          })}
+
+                        </select>
+                    : null
+                  }
+                  </div>
+                </div>
+          )
+        }
+        
+)} */}
+
             {generalFields.map((field, index) => (
               <InputField
                 key={`general-${index}`}
