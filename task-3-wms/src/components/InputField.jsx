@@ -50,9 +50,9 @@ export const InputField = ({
             placeholder={placeholder}
             required={required}
             name={name}
-            value={value} // Set the value for input
+            value={value} 
             onChange={(e) => {
-              onChange && onChange(e.target.value); // Pass the input value
+              onChange && onChange(e.target.value); 
             }}
           />
         )}
