@@ -29,7 +29,7 @@ export const InputField = ({
       <div className="w-10/12">
         {type === 'select' ? (
           <select
-            className="w-7/12 text-black border border-gray-300 rounded px-2 py-1 focus:outline-none"
+            className="w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10"
             value={value}
             onChange={(e) => {
               onChange && onChange(e.target.value);
@@ -46,7 +46,7 @@ export const InputField = ({
         ) : (
           <input
             type={type}
-            className="w-7/12 text-black border border-gray-300 rounded px-2 py-1 focus:outline-none"
+            className="w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10"
             placeholder={placeholder}
             required={required}
             name={name}

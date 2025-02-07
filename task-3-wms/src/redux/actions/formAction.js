@@ -1,5 +1,5 @@
 
-import { UPDATE_FIELD, RESET_FORM, SUBMIT_FORM, SUBMIT_FORM_SUCCESS, SUBMIT_FORM_FAILURE } from "../constant";
+import { UPDATE_FIELD, RESET_FORM, SUBMIT_FORM, SUBMIT_FORM_SUCCESS, SUBMIT_FORM_FAILURE, SET_SELECTED_SECTION } from "../constant";
 
 export const updateField = (name, value) => ({
     type: UPDATE_FIELD,
@@ -23,3 +23,8 @@ export const submitFormFailure = (error) => ({
     type: SUBMIT_FORM_FAILURE,
     payload: error,
 });
+
+export const setSelectedSection = (sectionName) => ({
+    type: SET_SELECTED_SECTION,
+    payload: sectionName,
+  });

@@ -55,7 +55,7 @@
         "sections": [
             {
                 "sectionName": "Packaging & Units",
-                "name": "PNU",
+                "name": "packaging_units",
                 "required": true,
                 "fields": [
                     {
@@ -80,8 +80,8 @@
                         "optionLabel": "uom"
                     },
                     {
-                        "label": "Package Size",
-                        "name": "",
+                        "label": "Package Size",   
+                        "name": "package_size",
                         "required": true,
                         "type": "number",
                         "placeholder": "Package Size"
@@ -104,92 +104,219 @@
             },
             {
                 "sectionName": "Classification",
-                "name" : "classification",
-                "required" : true,
-                "fields": [
-                  {
-                    "label": "Dosage Form",
-                    "name": "dosage_form",
-                    "required": true,
-                    "type": "select",
-                    "optionLabel": "dosage_form"
-                  },
-                  {
-                    "label": "Package Type",
-                    "name": "package_type",
-                    "required": true,
-                    "type": "select",
-                    "optionLabel": "package_type"
-                  },
-                  {
-                    "label": "UOM",
-                    "name": "uom",
-                    "required": true,
-                    "type": "select",
-                    "optionLabel": "uom"
-                  },
-                  {
-                    "label": "Package Size",
-                    "name": "",
-                    "required": true,
-                    "type": "number",
-                    "placeholder": "Package Size"
-                  }   
-                  
-                ]
-              },
-            {
-                "sectionName": "Packaging Details",
+                "name": "classification",
+                "required": true,
                 "fields": [
                     {
-                        "label": "Packaging Type",
-                        "name": "packaging_type",
+                        "label": "Is Assured",
+                        "name": "is_assured",
                         "required": true,
                         "type": "select",
-                        "options": [
-                            "box",
-                            "bottle",
-                            "pouch"
+                        "providedOptions": [
+                            "Yes",
+                            "No"
                         ]
                     },
                     {
-                        "label": "Weight",
-                        "name": "weight",
+                        "label": "Banned",
+                        "name": "is_banned",
                         "required": true,
-                        "type": "number",
-                        "placeholder": "Weight in KG"
+                        "type": "select",
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
+                        "label": "Is Active",
+                        "name": "is_active",
+                        "required": true,
+                        "type": "select",
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
+                        "label": "Is Hidden From Alternative",
+                        "name": "is_hidden_from_alternative",
+                        "required": true,
+                        "type": "select",
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    }
+                ]
+            },
+            {
+                "sectionName": "Transaction Units",
+                "name": "transaction_units",
+                "required": false,
+                "fields": [
+                    {
+                        "label": "Purchase Unit",
+                        "name": "purchase_unit",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "label": "Transfer Unit",
+                        "name": "transfer_unit",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "label": "Sales Unit",
+                        "name": "sales_unit",
+                        "required": false,
+                        "type": "number"
+                    }
+                ]
+            },
+            {
+                "sectionName": "GST Info",
+                "name": "gst_info",
+                "required": true,
+                "fields": [
+                    {
+                        "label": "GST Type",
+                        "name": "gst_type",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "gst_type"
+                    },
+                    {
+                        "label": "HSN Code",
+                        "name": "hsn_code",
+                        "required": true,
+                        "type": "number"
+                    }
+                ]
+            },
+            {
+                "sectionName": "Sales Category",
+                "name": "sales_category",
+                "required": true,
+                "fields": [
+                    {
+                        "label": "B2B Product type",
+                        "name": "b2b_category",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "b2b_category"
+                    },
+                    {
+                        "label": "B2C Product type",
+                        "name": "b2c_category",
+                        "required": true,
+                        "type": "select"
+                    },
+                    {
+                        "label": "Sales Trend Category",
+                        "name": "sales_trend_category",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "sales_trend_category"
+                    },
+                    {
+                        "label": "Return Type",
+                        "name": "product_return_type",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "product_return_type"
+                    }
+                ]
+            },
+            {
+                "sectionName": "MIS Category",
+                "name": "mis_category",
+                "required": false,
+                "fields": [
+                    {
+                        "label": "Reporting Category",
+                        "name": "mis_reporting_category",
+                        "required": false,
+                        "type": "select",
+                        "optionLabel": "mis_reporting_category"
+                    },
+                    {
+                        "label": "WH Category",
+                        "name": "mis_warehouse_category",
+                        "required": false,
+                        "type": "select",
+                        "optionLabel": "mis_warehouse_category"
                     }
                 ]
             }
         ]
     },
     {
-        "category": "medicine",
+        "category": "Services",
         "parentField": "product_type",
-        "parentValue": "medicine",
+        "parentValue": "Services",
         "sections": [
             {
-                "sectionName": "Medicine Details",
-                "fields": [
+                "sectionName" : "Classification",
+                "name" : "classification",
+                "required" : true,
+                "fields" : [
                     {
-                        "label": "Dosage Form",
-                        "name": "dosage_form",
+                        "label": "Is Active",
+                        "name": "is_active",
                         "required": true,
                         "type": "select",
-                        "options": [
-                            "tablet",
-                            "capsule",
-                            "syrup"
+                        "providedOptions": [
+                            "Yes",
+                            "No"
                         ]
+                    }
+                ]
+            },
+            {
+                "sectionName": "GST Info",
+                "name": "gst_info",
+                "required": true,
+                "fields": [
+                    {
+                        "label": "GST Type",
+                        "name": "gst_type",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "gst_type"
                     },
                     {
-                        "label": "Expiry Date",
-                        "name": "expiry_date",
+                        "label": "HSN Code",
+                        "name": "hsn_code",
                         "required": true,
-                        "type": "date"
+                        "type": "number"
+                    }
+                ]
+            },
+            {
+                "sectionName": "MIS Category",
+                "name": "mis_category",
+                "required": false,
+                "fields": [
+                    {
+                        "label": "Reporting Category",
+                        "name": "mis_reporting_category",
+                        "required": false,
+                        "type": "select",
+                        "optionLabel": "mis_reporting_category"
+                    },
+                    {
+                        "label": "WH Category",
+                        "name": "mis_warehouse_category",
+                        "required": false,
+                        "type": "select",
+                        "optionLabel": "mis_warehouse_category"
                     }
                 ]
             }
+            
+
+            
         ]
     }
 ]
