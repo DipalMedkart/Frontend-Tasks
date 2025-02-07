@@ -1,67 +1,74 @@
 import React from 'react'
 import Link from 'next/link';
+import Options from '@/components/Options';
+import ProductsTable from '@/components/ProductsTable';
+import Pagination from '@/components/Pagination';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSelectOptionsRequest } from '@/redux/actions/selectOptionsAction';
+import Table from '@/components/Table';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 const ProductMaster = () => {
-  return (
-    
-        <div className="container mx-auto my-6 p-4 shadow-lg rounded-lg bg-white ">
-            <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-semibold text-black">Product Master</h1>
-                <Link href="/product-master/add-product">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                        + Add 
-                    </button>
-                </Link>
-            </div>
 
-            <table className="min-w-full border border-gray-300">
-                <thead>
-                    <tr>
-                        <th className="border-b p-2">Product Name</th>
-                        <th className="border-b p-2">Category</th>
-                        <th className="border-b p-2">Price</th>
-                        <th className="border-b p-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {products.map((product) => (
-                        <tr key={product.id}>
-                            <td className="border-b p-2">{product.name}</td>
-                            <td className="border-b p-2">{product.category}</td>
-                            <td className="border-b p-2">{product.price}</td>
-                            <td className="border-b p-2">
-                                <Link href={`/edit-product/${product.id}`}>
-                                    <button className="bg-yellow-500 text-white px-2 py-1 rounded-md hover:bg-yellow-600">
-                                        Edit
-                                    </button>
-                                </Link>
-                            </td>
-                        </tr>
-                    ))} */}
-                </tbody>
-            </table>
+    const dispatch = useDispatch()
+    const products = useSelector((state) => state.prod.products)
+    const router = useRouter();
+    console.log(products);
 
-            {/* Pagination */}
-            <div className="flex justify-between mt-4">
-                <button
-                    // onClick={handlePreviousPage}
-                    className="bg-gray-300 px-4 py-2 rounded-md disabled:opacity-50"
-                    // disabled={currentPage === 1}
-                >
-                    Previous
-                </button>
-                {/* <span>Page {currentPage} of {totalPages}</span> */}
-                <button
-                    // onClick={handleNextPage}
-                    className="bg-gray-300 px-4 py-2 rounded-md disabled:opacity-50"
-                    // disabled={currentPage === totalPages}
-                >
-                    Next
-                </button>
+    const handleAddClick = () => {
+        dispatch(fetchSelectOptionsRequest())
+    }
+
+    const handleEditClick = (productCode) => {
+        if(productCode){
+
+            router.push(`product-master/edit-product/${productCode}`)
+        }else{
+            toast.error("This product is not editable")
+        }
+    }
+
+    const headers = [
+        { Label: "Product Code", fieldKey: "product_code" },
+        { Label: "Wondersoft Code", fieldKey: "ws_code" },
+        { Label: "Product Name", fieldKey: "product_name" },
+        { Label: "Manufacturer", fieldKey: "manufacturer" },
+        { Label: "Combination", fieldKey: "combination" },
+        { Label: "Status", fieldKey: "publish_status" },
+        {
+            customField: (row) => {
+                const productCode = row.product_code;
+                console.log(productCode);
+                // console.log(row);
+                return (
+                    <>
+                        <button className="bg-gray-200  text-white px-2 py-1 rounded mr-2" onClick={() => handleEditClick(productCode)}><img src='/edit.png' /></button>
+                        <button className="bg-gray-200  text-white px-2 py-1 rounded"><img src='/copy.png' /></button>
+                    </>
+                )
+            }
+        }
+    ];
+    return (
+        <>
+            <div className="w-10/12 mx-auto py-5 shadow-lg rounded-lg bg-white">
+                <div className="flex items-center justify-between">
+                    <h1 className="text-2xl font-semibold text-black">Product Master</h1>
+                    <Link href="/product-master/add-product">
+                        <button className="bg-[#5556a6] text-white px-5 py-2 rounded-md hover:bg-[#44458e] transition" onClick={() => handleAddClick()}>
+                            + Add
+                        </button>
+                    </Link>
+                </div>
             </div>
-        </div>
+            <Options />
+            {/* <ProductsTable /> */}
+            <Table headers={headers} data={products} />
+            <Pagination />
+        </>
     );
-  
+
 }
 
 export default ProductMaster

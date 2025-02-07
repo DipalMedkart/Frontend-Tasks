@@ -6,22 +6,22 @@ import Link from 'next/link';
 const Navbar = () => {
     
     const router = useRouter();
-    // const handleClick = () => {
-    //     router.push('/');
-    // }
+    const handleClick = () => {
+        router.push('/');
+    }
 
     const buttons = [
-        { name: "Dashboard", imageSrc: null, isDropdown: false },
+        { name: "Dashboard", imageSrc:`/navdash.png`, isDropdown: false, onClick : handleClick},
         {
             name: "Masters",
-            imageSrc: null,
+            imageSrc: `/productMaster.png`,
             isDropdown: true,
             dropdownItems: [
                 { name: "Product Master" },
                 { name: "Product Request" },
             ],
         },
-        { name: "Settings", imageSrc: null, isDropdown: false },
+        { name: "Settings", imageSrc: `/setting.png`, isDropdown: false },
         
     ];
 
@@ -33,7 +33,7 @@ const Navbar = () => {
 
     const handleDropdownClick = (name) => {
         if (name === "Product Master") {
-            router.push('/product-master');
+            router.push('/product-master'); 
             // <Link href="/product-master">
                 
             // </Link>
@@ -49,7 +49,7 @@ const Navbar = () => {
                     <Button
                         key={index}
                         name={button.name}
-                        onClick={button.isDropdown ? handleDropdownClick : () => button.onclick}
+                        onClick={button.isDropdown ? handleDropdownClick : button.onClick}
                         imageSrc={button.imageSrc}
                         isDropdown={button.isDropdown}
                         dropdownItems={button.dropdownItems}

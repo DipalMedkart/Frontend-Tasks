@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logoutRequest } from '@/redux/actions/authAction';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { persistor } from '@/redux/store';
 
 const DashboardBar = () => {
     const name = useSelector((state) => state.auth.user?.name);
     const email = useSelector((state) => state.auth.user?.email);
     const names = name?.split(" ");
-    const firstName =names && names[0]?.charAt(0).toUpperCase() || "";
-    const lastName =names && names[1]?.charAt(0).toUpperCase() || "";
+    const firstName = names && names[0]?.charAt(0).toUpperCase() || "";
+    const lastName = names && names[1]?.charAt(0).toUpperCase() || "";
     const router = useRouter()
 
     const dispatch = useDispatch();
@@ -18,7 +19,8 @@ const DashboardBar = () => {
 
     const handleLogout = () => {
         dispatch(logoutRequest())
-        router.push("/login")
+        persistor.purge();
+        // router.push("/login")
     }
 
     return (
@@ -26,9 +28,9 @@ const DashboardBar = () => {
 
             <div className="flex items-center ml-20">
                 <img
-                    src="https://stage.mkwms.dev/assets/medcart-logo.svg"
+                    src="/dashboardLogo.png"
                     alt="Logo"
-                    className="h-8 mr-2"    
+                    className="h-8 mr-2"
                 />
             </div>
 
@@ -68,13 +70,22 @@ const DashboardBar = () => {
                                     Profile
                                 </button>
 
-
+                                <Link href='/login'>
+                                    <button
+                                        className="w-full  text-black font-medium py-2  transition-all hover:bg-gray-200"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </button>
+                                </Link>
+                                {/* <Link href='/login'>
                                 <button
                                     className="w-full  text-black font-medium py-2  transition-all hover:bg-gray-200"
-                                    onClick={handleLogout}
-                                >
+                                    // onClick={handleLogout}
+                                    >
                                     Logout
                                 </button>
+                                    </Link> */}
                             </div>
                         )}
                     </div>

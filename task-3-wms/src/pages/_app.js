@@ -1,16 +1,21 @@
 import "@/styles/globals.css";
 import { Provider } from "react-redux";
-import store from "@/redux/store";
+import { store, persistor } from "@/redux/store";
 import { ToastContainer } from "react-toastify";
 import Layout from "@/components/Layout";
+import { PersistGate } from "redux-persist/integration/react";
+
 export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <Layout>
+      <PersistGate loading={null} persistor={persistor}>
 
-        <ToastContainer />
-        <Component {...pageProps} />
-      </Layout>
+        <Layout>
+
+          <ToastContainer />
+          <Component {...pageProps} />
+        </Layout>
+      </PersistGate>
     </Provider>
   )
 }

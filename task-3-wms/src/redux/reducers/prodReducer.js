@@ -1,5 +1,5 @@
-import { FastForward } from "lucide-react";
-import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, SET_FILTER_OPTION, SET_SEARCH_OPTION, SET_SEARCH_TERM, SET_SORT_OPTION, SET_CURRENT_PAGE } from "../constant";
+
+import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, SET_FILTER_OPTION, SET_SEARCH_OPTION, SET_SEARCH_TERM, SET_SORT_OPTION, SET_CURRENT_PAGE, SET_SORT_ORDER } from "../constant";
 
 const initialState = {
     products: [],
@@ -7,9 +7,10 @@ const initialState = {
     loading: false,
     error: null,
     searchTerm: '',
-    searchOption: '',   
+    searchOption: 'name',   
     filterOptions: Array(5).fill(''),
-    sortOption: '',
+    sortOption: 'created',
+    sortOrder : 'd',    
     currentPage : 1,
 
 }
@@ -32,6 +33,8 @@ export const productReducer = (state = initialState, action) => {
             return { ...state, filterOption: action.payload }
         case SET_SORT_OPTION:
             return { ...state, sortOption: action.payload }
+        case SET_SORT_ORDER:
+            return { ...state, sortOrder: action.payload }
         case SET_CURRENT_PAGE:
             return {...state, currentPage: action.payload }
         default:

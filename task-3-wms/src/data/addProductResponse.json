@@ -1,0 +1,28 @@
+{
+    "code": 200,
+    "type": "Success",
+    "message": "Product Added Successfully.",
+    "product": {
+        "product_id": 56049,
+        "product_name": "test by intern 2",
+        "product_code": null,
+        "product_name_web": "-",
+        "ws_code": "-",
+        "manufacturer": "SHETH BROTHERS",
+        "combination": "SERTRALINE 100 MG SUSTAINED RELEASE",
+        "b2b_category": "ETHICAL",
+        "b2c_category": "Disc 10 Perc",
+        "is_discontinued": false,
+        "is_banned": false,
+        "mrp": 0,
+        "sales_price": 0,
+        "gst_type": "0%",
+        "last_sync_at": "-",
+        "package_type": "Tube",
+        "publish_status": "Draft",
+        "is_active": true,
+        "is_zoho_sync": false,
+        "zoho_voucher_type": "ITEM",
+        "zoho_last_sync_at": null
+    }
+}

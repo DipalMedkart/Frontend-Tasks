@@ -1,0 +1,195 @@
+[
+    {
+        "category": "general",
+        "fields": [
+            {
+                "label": "Product Name",
+                "name": "product_name",
+                "required": true,
+                "type": "text",
+                "placeholder": "Product name"
+            },
+            {
+                "label": "Product Type",
+                "name": "product_type",
+                "required": true,
+                "type": "select",
+                "optionLabel": "product_type"
+            },
+            {
+                "label": "Wondersoft Code",
+                "name": "ws_code",
+                "required": true,
+                "type": "number",
+                "placeholder": "Wondersoft Code"
+            },
+            {
+                "label": "Product Code",
+                "name": "product_code",
+                "required": true,
+                "type": "number",
+                "placeholder": "Product Code"
+            }
+        ]
+    },
+    {
+        "category": "Goods",
+        "parentField": "product_type",
+        "parentValue": "Goods",
+        "fields": [
+            {
+                "label": "Manufacturer",
+                "name": "manufacturer",
+                "required": true,
+                "type": "select",
+                "placeholder": ""
+            },
+            {
+                "label": "MRP",
+                "name": "mrp",
+                "required": true,
+                "type": "number",
+                "placeholder": "MRP"
+            }
+        ],
+        "sections": [
+            {
+                "sectionName": "Packaging & Units",
+                "name": "PNU",
+                "required": true,
+                "fields": [
+                    {
+                        "label": "Dosage Form",
+                        "name": "dosage_form",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "dosage_form"
+                    },
+                    {
+                        "label": "Package Type",
+                        "name": "package_type",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "package_type"
+                    },
+                    {
+                        "label": "UOM",
+                        "name": "uom",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": "uom"
+                    },
+                    {
+                        "label": "Package Size",
+                        "name": "",
+                        "required": true,
+                        "type": "number",
+                        "placeholder": "Package Size"
+                    }
+                ]
+            },
+            {
+                "sectionName": "Molecule Composition",
+                "name": "molecule_composition",
+                "required": true,
+                "fields": [
+                    {
+                        "label": "Molecules",
+                        "name": "Combination",
+                        "required": true,
+                        "type": "select",
+                        "optionLabel": ""
+                    }
+                ]
+            },
+            {
+                "sectionName": "Classification",
+                "name" : "classification",
+                "required" : true,
+                "fields": [
+                  {
+                    "label": "Dosage Form",
+                    "name": "dosage_form",
+                    "required": true,
+                    "type": "select",
+                    "optionLabel": "dosage_form"
+                  },
+                  {
+                    "label": "Package Type",
+                    "name": "package_type",
+                    "required": true,
+                    "type": "select",
+                    "optionLabel": "package_type"
+                  },
+                  {
+                    "label": "UOM",
+                    "name": "uom",
+                    "required": true,
+                    "type": "select",
+                    "optionLabel": "uom"
+                  },
+                  {
+                    "label": "Package Size",
+                    "name": "",
+                    "required": true,
+                    "type": "number",
+                    "placeholder": "Package Size"
+                  }   
+                  
+                ]
+              },
+            {
+                "sectionName": "Packaging Details",
+                "fields": [
+                    {
+                        "label": "Packaging Type",
+                        "name": "packaging_type",
+                        "required": true,
+                        "type": "select",
+                        "options": [
+                            "box",
+                            "bottle",
+                            "pouch"
+                        ]
+                    },
+                    {
+                        "label": "Weight",
+                        "name": "weight",
+                        "required": true,
+                        "type": "number",
+                        "placeholder": "Weight in KG"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "category": "medicine",
+        "parentField": "product_type",
+        "parentValue": "medicine",
+        "sections": [
+            {
+                "sectionName": "Medicine Details",
+                "fields": [
+                    {
+                        "label": "Dosage Form",
+                        "name": "dosage_form",
+                        "required": true,
+                        "type": "select",
+                        "options": [
+                            "tablet",
+                            "capsule",
+                            "syrup"
+                        ]
+                    },
+                    {
+                        "label": "Expiry Date",
+                        "name": "expiry_date",
+                        "required": true,
+                        "type": "date"
+                    }
+                ]
+            }
+        ]
+    }
+]

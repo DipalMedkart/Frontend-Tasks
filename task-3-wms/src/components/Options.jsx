@@ -1,22 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setSearchOption, setSearchTerm, setFilterOptions, fetchProductRequest, setSortOption , setCurrentPage} from '@/redux/actions/prodAction'
-
-
+import { setSearchOption, setSearchTerm, setFilterOptions, fetchProductRequest, setSortOption, setCurrentPage, setSortOrder } from '@/redux/actions/prodAction'
+import { useState } from 'react'
+import FilterComponent from './FilterComponent'
+import Filter from './Filter'
 
 const Options = () => {
 
     const dispatch = useDispatch();
     const searchTerm = useSelector((state) => state.prod.searchTerm);
-    const filterOptions = useSelector((state) => state.prod.filterOptions);
+    // const filterOptions = useSelector((state) => state.prod.filterOptions);
     const sortOption = useSelector((state) => state.prod.sortOption)
     const currentPage = useSelector((state) => state.prod.currentPage)
+    const token = useSelector((state) => state.auth.token)
+    const sortOrder = useSelector((state) => state.prod.sortOrder);
+    const searchOption = useSelector((state) => state.prod.searchOption)
+    const selectedFilters = useSelector((state) => state.filter.selectedFilters);
+
+    console.log(selectedFilters);
+    const { isAssured, isRegistered, status, manufacturers, molecules } = selectedFilters;
+
+    const filterOptions = {
+        is_assured: isAssured || null,
+        is_refrigerated: isRegistered || null,
+        publish_status: status || null,
+        manufacturer: manufacturers || null,
+        combination: molecules || null
+    }
 
     const [filterVisible, setFilterVisible] = useState(false);
     const [sortVisible, setSortVisible] = useState(false);
 
     const handleSearchChange = (e) => {
         dispatch(setSearchTerm(e.target.value));
+        dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
     };
 
     const toggleFilter = () => {
@@ -37,82 +54,157 @@ const Options = () => {
         dispatch(setSortOption(e.target.value));
     };
 
-    const handleSearchSubmit = () => {
-         
-        dispatch(fetchProductRequest(currentPage, sortOption, filterOptions, searchTerm));
+    const handleSortOrderChange = (e) => {
+        dispatch(setSortOrder(e.target.value));
     };
 
+    const applySort = () => {
+        dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
+        toggleSort();
+    };
 
-  return (
-    <div className="flex justify-between p-4">
-            
-            <div className="flex items-center">
-                <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    placeholder="Search"
-                    className="p-2 border border-gray-300 rounded-md"
-                />
-                <select className="ml-2 p-2 border border-gray-300 rounded-md">
-                    <option value="">Search By</option>
-                    <option value="productName">Product Name</option>
-                    <option value="ws_code">WS Code</option>
-                </select>
-                <button onClick={handleSearchSubmit} className="ml-2 p-2 bg-blue-500 text-white rounded-md">
-                    Search
-                </button>
-            </div>
+    const handleSearchSubmit = () => {
+        console.log(currentPage, sortOption);
+        dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
+    };
 
-            
-            <div className="flex items-center">
-                <div className="relative mr-4">
-                    <button onClick={toggleFilter} className="p-2 border border-gray-300 rounded-md">
-                        Filter
+    const handleSearchOption = (e) => {
+        dispatch(setSearchOption(e.target.value));
+    }
+
+    useEffect(() => {
+        dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
+    }, [])
+
+
+    return (
+        <>
+            <div className="flex justify-between py-4 w-10/12 mx-auto shadow-lg ">
+                <div className="flex items-center">
+                    <div className='flex items-center border border-gray-300 h-10 w-80'>
+
+                        <img src="/search.png" alt="" className='ml-2 py-0'/>
+                        <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                            placeholder="Search"
+                            className="text-black h-full focus:outline-none"
+                        />
+                    </div>
+                    <select className="p-2 border border-gray-300 text-black h-10 focus:outline-none " value={searchOption} onChange={handleSearchOption}>
+                        <option value="name" className='hover:bg-[#5556a6]'>Product Name</option>
+                        <option value="ws_code" className='hover:bg-[#5556a6]'>WS Code</option>
+                        <option value="product_code" className='hover:bg-[#5556a6]'>Product Code</option>
+                        <option value="manufacturer" className='hover:bg-[#5556a6]'>Manufacture</option>
+                    </select>
+                    <button
+                        onClick={handleSearchSubmit}
+                        className="py-2 px-4 ml-2 rounded-md bg-[#5556a6] text-white h-10 flex items-center"
+                    >
+                        Search
                     </button>
-                    {filterVisible && (
-                        <div className="absolute left-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg p-2">
-                            {Array.from({ length: 5 }, (_, index) => (
-                                <div key={index} className="mb-2">
-                                    <select
-                                        value={filterOptions[index]}
-                                        onChange={handleFilterChange(index)}
-                                        className="p-2 border border-gray-300 rounded-md w-full"
-                                    >
-                                        <option value="">Select Filter {index + 1}</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                    </select>
-                                </div>
-                            ))}
-                        </div>
-                    )}
                 </div>
 
-                <div className="relative">
-                    <button onClick={toggleSort} className="p-2 border border-gray-300 rounded-md">
+                <div className="flex items-center space-x-0 relative">
+                    <button
+                        className="flex items-center text-black px-4 py-2 border border-gray-300 bg-white hover:bg-gray-100 transition duration-200"
+                        onClick={toggleFilter}
+                    >
+                        <img src="/filter.png" alt="filter" className="w-4 h-4 mr-2" />
+                        Filter
+                    </button>
+                    <button
+                        className="flex items-center text-black px-4 py-2 border border-gray-300 bg-white hover:bg-gray-100 transition duration-200 relative inline-block"
+                        onClick={toggleSort}
+                    >
+                        <img src="/sorting.png" alt="sort" className="w-4 h-4 mr-2" />
                         Sort By
                     </button>
+
                     {sortVisible && (
-                        <div className="absolute left-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg p-2">
+                        <div className="absolute left-0 top-full mt-1 w-64 bg-white p-4 rounded-lg shadow-lg border border-gray-300 z-10">
+                            <h3 className="text-lg font-semibold mb-3 text-black">Sort Options</h3>
+
+                            <label className="block text-sm font-medium mb-1 text-black">Sort By:</label>
                             <select
                                 value={sortOption}
                                 onChange={handleSortChange}
-                                className="p-2 border border-gray-300 rounded-md w-full"
+                                className="w-full p-2 border border-gray-300 rounded-md mb-3 text-black"
                             >
-                                <option value="">Select Sort Option</option>
-                                <option value="created">Created Date</option>
-                                <option value="name">Name</option>
-                                <option value="price">Price</option>
-                                
+                                <option value="product_code" className='text-black'>Product Code</option>
+                                <option value="ws_code" className='text-black'>Wondersoft Code</option>
+                                <option value="name" className='text-black'>Product Name</option>
+                                <option value="created" className='text-black'>Created at</option>
+                                <option value="modified" className='text-black'>Updated at</option>
                             </select>
+
+                            <label className="block text-sm font-medium mb-1">Sort Order:</label>
+                            <div className="flex items-center space-x-4 mb-3 ">
+                                <label className="flex items-center text-black">
+                                    <input
+                                        type="radio"
+                                        value="ascending"
+                                        checked={sortOrder === "ascending"}
+                                        onChange={handleSortOrderChange}
+                                        className="mr-2 bg-black"
+                                    />
+                                    Ascending
+                                </label>
+                                <label className="flex items-center text-black">
+                                    <input
+                                        type="radio"
+                                        value="descending"
+                                        checked={sortOrder === "descending"}
+                                        onChange={handleSortOrderChange}
+                                        className="mr-2"
+                                    />
+                                    Descending
+                                </label>
+                            </div>
+
+                            <div className="flex justify-end space-x-3">
+                                <button
+                                    onClick={toggleSort}
+                                    className="px-3 py-1 bg-gray-300 rounded-md hover:bg-gray-400 text-sm text-black"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={applySort}
+                                    className="px-3 py-1 bg-[#5556a6] text-white rounded-md hover:bg-[#434495] text-sm"
+                                >
+                                    Apply
+                                </button>
+                            </div>
                         </div>
                     )}
                 </div>
             </div>
-        </div>
-  )
+
+
+            {filterVisible && (
+                // <div className="flex justify-between py-4 w-10/12 mx-auto rounded-md bg-white shadow-lg">
+
+                //     <div className="flex space-x-4">
+                //         {Array.from({ length: 5 }, (_, index) => (
+                //             <select key={index} className="p-2 border border-gray-300 text-black h-10">
+                //                 Select it bro 
+                //                 <option value="">Select Filter {index + 1}</option>
+                //                 <option value="option1">Option 1</option>
+                //                 <option value="option2">Option 2</option>
+                //                 <option value="option3">Option 3</option>
+                //             </select>
+                //         ))}
+                //     </div>
+                // </div>
+                // <FilterComponent/>
+                <Filter />
+            )}
+
+
+        </>
+    );
 }
 
 export default Options

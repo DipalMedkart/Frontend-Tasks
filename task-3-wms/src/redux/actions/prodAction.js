@@ -1,11 +1,10 @@
-import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_REQUEST, SET_FILTER_OPTION, SET_SEARCH_OPTION, SET_SEARCH_TERM, SET_SORT_OPTION } from "../constant";
+import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_REQUEST, SET_FILTER_OPTION, SET_SEARCH_OPTION, SET_SEARCH_TERM, SET_SORT_OPTION, SET_SORT_ORDER, SET_CURRENT_PAGE } from "../constant";
 
-export const fetchProductRequest = (page, sortBy, filterOptions, searchQuery) => {
-
+export const fetchProductRequest = (page, sortOption, sortOrder, filterOptions, searchQuery, searchOption, token) => {
 
     return ({
         type: FETCH_PRODUCTS_REQUEST,
-        payload: { page, sortBy, filterOptions, searchQuery },
+        payload: { page, sortOption, sortOrder, filterOptions, searchQuery, searchOption, token },
     })
 
 }
@@ -36,7 +35,7 @@ export const setSearchOption = (option) => ({
 
 export const setFilterOptions = (filterKey, value) => ({
     type: SET_FILTER_OPTION,
-    payload: {filterKey, value},
+    payload: { filterKey, value },
 });
 
 export const setSortOption = (option) => ({
@@ -50,3 +49,8 @@ export const setCurrentPage = (page) => {
         payload: page,
     })
 }
+
+export const setSortOrder = (order) => ({
+    type: SET_SORT_ORDER,
+    payload: order === "ascending" ? "a" : "d",
+});

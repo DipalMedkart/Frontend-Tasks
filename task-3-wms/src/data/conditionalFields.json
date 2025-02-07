@@ -1,0 +1,4 @@
+[
+    { "label": "Manufacturer", "name": "manufacturer", "required": true, "type": "select", "placeholder": "" },
+    { "label": "MRP", "name": "mrp", "required": true, "type": "number", "placeholder": "MRP" }
+  ]

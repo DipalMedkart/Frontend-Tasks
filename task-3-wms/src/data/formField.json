@@ -1,0 +1,34 @@
+[
+    {
+      "label": "Product Name",
+      "name": "productName",
+      "required": true,
+      "type": "text",
+      "placeholder": "Product name"
+    },
+    {
+      "label": "Product Type",
+      "name": "product_type",
+      "required": true,
+      "type": "select",
+      "optionLabel": "product_type"
+    },
+    {
+      "label": "Wondersoft Code",
+      "name": "ws_code",
+      "required": true,
+      "type": "number",
+  
+      "placeholder": "Wondersoft Code"
+    },
+    {
+      "label": "Product Code",
+      "name": "product_code",
+      "required": true,
+      "type": "number",
+      "placeholder": "Product Code"
+    }
+
+    
+
+  ]

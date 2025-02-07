@@ -45,7 +45,7 @@ const login = () => {
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
                 <div className="flex justify-center mb-4">
-                    <img src="https://stage.mkwms.dev/assets/medcart-logo.svg" alt="Medkart Logo" className="h-10  text-black" />
+                    <img src="/loginLogo.png" alt="Medkart Logo" className="h-10  text-black" />
                 </div>
                 <h2 className="text-center text-xl font-semibold text-gray-700 mb-6">
                     Login to WMS
