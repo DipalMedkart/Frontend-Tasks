@@ -10,7 +10,9 @@ export const InputField = ({
   optionLabel,
   value,
   onChange,
-  providedOptions
+  providedOptions,
+  hasSearch = false,
+
 }) => {
   const masterData = useSelector((state) => state.selectOptions.selectOptions);
   const options = masterData?.[optionLabel] || [];
@@ -26,35 +28,51 @@ export const InputField = ({
         </label>
       </div>
 
-      <div className="w-10/12">
-        {type === 'select' ? (
-          <select
-            className="w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10"
-            value={value}
-            onChange={(e) => {
-              onChange && onChange(e.target.value);
-            }}
-          >
-            <option value=""></option>
-            {selectionOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+      <div className="w-10/12 relative">
+        
+          {type === 'select' ? (
+            <div className='relative'>
 
+            {/* {hasSearch && (
+              <input
+              type="text"
+              className="w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10 mb-2"
+                placeholder="Search..."
+                value={value}
+              onChange={(e) => {
+                onChange && onChange(e.target.value);
+              }}
+              />
+            )} */}
+
+            <select
+              className="w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10"
+              value={value}
+              onChange={(e) => {
+                onChange && onChange(e.target.value);
+              }}
+            >
+              <option value=""></option>
+              {selectionOptions.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+          </div>
         ) : (
           <input
-            type={type}
-            className="w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10"
-            placeholder={placeholder}
-            required={required}
-            name={name}
-            value={value} 
-            onChange={(e) => {
-              onChange && onChange(e.target.value); 
+          type={type}
+          className="w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10"
+          placeholder={placeholder}
+          required={required}
+          name={name}
+          value={value}
+          onChange={(e) => {
+            onChange && onChange(e.target.value);
             }}
-          />
+            />
         )}
       </div>
     </div>

@@ -97,6 +97,7 @@
                         "label": "Molecules",
                         "name": "Combination",
                         "required": true,
+                        "hasSearch" : true,
                         "type": "select",
                         "optionLabel": ""
                     }
@@ -209,6 +210,7 @@
                     {
                         "label": "B2C Product type",
                         "name": "b2c_category",
+                        "hasSearch" : true,
                         "required": true,
                         "type": "select"
                     },

@@ -77,6 +77,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
                 value={formData[field.name] ?? ""}
                 providedOptions={field.providedOptions}
+                hasSearch={field?.hasSearch}
               />
             ))}
 
@@ -92,6 +93,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
                 value={formData[field.name] ?? ""}
                 providedOptions={field.providedOptions}
+                hasSearch={field?.hasSearch}
               />
             ))}
           </div>
@@ -127,6 +129,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
                 value={formData[field.name] ?? ""}
                 providedOptions={field.providedOptions}
+                hasSearch={field?.hasSearch}
               />
             ))}
 
