@@ -39,9 +39,10 @@
         "fields": [
             {
                 "label": "Manufacturer",
-                "name": "manufacturer",
+                "name": "manufacturers",
                 "required": true,
                 "type": "select",
+                "hasSearch" : true,
                 "placeholder": ""
             },
             {
@@ -95,7 +96,7 @@
                 "fields": [
                     {
                         "label": "Molecules",
-                        "name": "Combination",
+                        "name": "molecules",
                         "required": true,
                         "hasSearch" : true,
                         "type": "select",
@@ -185,7 +186,13 @@
                         "name": "gst_type",
                         "required": true,
                         "type": "select",
-                        "optionLabel": "gst_type"
+                        "providedOptions" : [
+                            {"key" : "0%", "value" : "0"},
+                            {"key" : "5%", "value" : "5"},
+                            {"key" : "10%", "value" : "10"},
+                            {"key" : "12%", "value" : "12"},
+                            {"key" : "15%", "value" : "15"}
+                        ]
                     },
                     {
                         "label": "HSN Code",
@@ -209,7 +216,7 @@
                     },
                     {
                         "label": "B2C Product type",
-                        "name": "b2c_category",
+                        "name": "b2c-template",
                         "hasSearch" : true,
                         "required": true,
                         "type": "select"

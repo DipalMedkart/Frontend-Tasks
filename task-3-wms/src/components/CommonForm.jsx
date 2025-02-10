@@ -113,6 +113,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 value={formData[field.name] ?? ""}
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
+                
               />
             ))}
 

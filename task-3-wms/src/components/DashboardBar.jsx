@@ -24,7 +24,7 @@ const DashboardBar = () => {
     }
 
     return (
-        <div className="flex justify-between items-center p-3 bg-[#5556a6] text-white relative">
+        <div className="flex justify-between items-center p-3 px-20 bg-[#5556a6] text-white relative">
 
             <div className="flex items-center ml-20">
                 <img

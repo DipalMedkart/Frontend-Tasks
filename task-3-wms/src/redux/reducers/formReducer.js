@@ -1,9 +1,9 @@
-// src/redux/reducers/formReducer.js
-import { UPDATE_FIELD, RESET_FORM, SUBMIT_FORM_SUCCESS, SUBMIT_FORM_FAILURE, SET_SELECTED_SECTION} from "../constant";
+
+import { UPDATE_FIELD, RESET_FORM, SUBMIT_FORM_SUCCESS, SUBMIT_FORM_FAILURE, SET_SELECTED_SECTION } from "../constant";
 
 const initialState = {
     formData: {},
-    selectedSection : 'packaging_units',
+    selectedSection: 'packaging_units',
     loading: false,
     error: null,
 };
@@ -31,7 +31,7 @@ export const formReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: null,
-                formData: {}, 
+                formData: {},
             };
 
         case SUBMIT_FORM_FAILURE:
@@ -40,11 +40,11 @@ export const formReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload,
             };
-            case SET_SELECTED_SECTION:
-                return {
-                    ...state,
-                    selectedSection : action.payload
-                }
+        case SET_SELECTED_SECTION:
+            return {
+                ...state,
+                selectedSection: action.payload
+            }
 
         default:
             return state;

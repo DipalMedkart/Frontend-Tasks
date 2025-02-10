@@ -10,17 +10,33 @@ function* fetchFilterOptions(action) {
     // const token = useSelector((state) => state.auth.token);
     // console.log(token);
 
-    const {searchQueries} = action.payload
+    const {filterType ,searchQueries, isSelection} = action.payload
     console.log(searchQueries);
+    console.log(filterType);
     console.log(action);
     try {
 
         const params = new URLSearchParams()
         if(searchQueries){
-            params.append("search", searchQueries);
+            if(filterType === 'b2c-template'){
+                params.append("search", `${searchQueries},category_name`);
+            }else{
+
+                params.append("search", `${searchQueries},name`);
+            }
         }
-    
-        const response = yield call(axiosInstance.get, `/master/${action.payload.filterType}?${params.toString()}${params ? ',name' : ''}`)
+     
+        if (isSelection) {
+            params.append("status", "Active");
+        }
+
+       
+       
+        
+        
+        // const response = yield call(axiosInstance.get, `/master/${action.payload.filterType}?${params.toString()}${params ? ',name' : ''}`)
+        const response = yield call(axiosInstance.get, `/master/${action.payload.filterType}?${params.toString()}`)
+        
         yield put({ type: FETCH_FILTER_OPTIONS_SUCCESS, payload: response.data })
     } catch (error) {
         yield put({ type: FETCH_FILTER_OPTIONS_FAILURE, payload: error.message })
