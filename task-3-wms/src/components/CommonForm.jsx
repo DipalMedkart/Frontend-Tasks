@@ -11,7 +11,7 @@ import formJSON from '../data/formData.json'
 
 
 
-const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, handleSelectedSection, buttons, onFormSubmit }) => {
+const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, handleSelectedSection, buttons, onFormSubmit, initailValues }) => {
 
 
   const dispatch = useDispatch();
@@ -20,32 +20,32 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
   const error = useSelector((state) => state.form.error);
   const selectedSection = useSelector((state) => state.form.selectedSection);
 
-  console.log(JSONData);
+  // console.log(JSONData);
 
   // const selectedType = formData.product_type;
   console.log(formData);
-  console.log(selectedType);
+  // console.log(selectedType);
 
   const generalFields = JSONData.find(item => item.category === "general")?.fields || [];
-  console.log(generalFields);
+  // console.log(generalFields);
 
   const selectedCategory = JSONData.find(item => item.category === selectedType)
   const categoryFields = selectedCategory?.fields || [];
-  console.log(categoryFields);
+  // console.log(categoryFields);
 
   const sectionNames = selectedCategory?.sections?.map(sec => ({
     NameToDisplay: sec.sectionName,
     value: sec.name,
     requirement: sec.required
   })) || [];
-  console.log(sectionNames);
+  // console.log(sectionNames);
 
 
 
   const selectedSectionData = selectedCategory?.sections?.find(sec => sec.name === selectedSection);
-  console.log(selectedSectionData);
+  // console.log(selectedSectionData);
   const sectionFields = selectedSectionData?.fields || [];
-  console.log(sectionFields);
+  // console.log(sectionFields);
 
   if (loading) {
     return (
@@ -65,40 +65,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
 
           <div className='mb-10'>
 
-          {/* {
-        JSONData?.map((data,index)=>{
-          // if(data?.fieldType === "input"){
-            return (
-              <div key={"input"+index} className='flex items-center'>
-                  <div className='label'>{data?.label}</div>
-                  <div className='input-container'>
-                    {
-
-                      (data?.fieldType === "input") ? 
-                        
-                        <input
-                        className='text-black'
-                        id={data?.fieldKey}
-                        value={fieldData[data?.fieldKey]}
-                        onChange={(e)=>{ onChangeInput(e,data)}}
-                        />
-                      : (data?.fieldType === "select") ?
-                        <select onChange={(e)=>{ onChangeInput(e,data)}} value={fieldData[data?.fieldKey]}>
-                          {formData12[data?.fieldKey]?.map((option)=>{
-                            return(
-                            <option value={`${data?.optionValue ? option[data?.optionValue] : option}`}>{data?.optionLabel? option[data?.optionLabel] : option}</option>
-                            )
-                          })}
-
-                        </select>
-                    : null
-                  }
-                  </div>
-                </div>
-          )
-        }
-        
-)} */}
+       
 
             {generalFields.map((field, index) => (
               <InputField
@@ -110,10 +77,11 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
-                value={formData[field.name] ?? ""}
+                value={formData[field.initailValues] ? formData[field.initailValues]  : formData[field.name]}
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
-                
+                isDisbaled={field?.disable}
+
               />
             ))}
 
@@ -127,9 +95,11 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
-                value={formData[field.name] ?? ""}
+                // value={formData[field.name] ?? ""}
+                value={formData[field.initailValues] ? formData[field.initailValues]  : formData[field.name]}
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
+                isDisbaled={field?.disable}
               />
             ))}
           </div>
@@ -163,9 +133,10 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
-                value={formData[field.name] ?? ""}
+                value={formData[field.initailValues] ? formData[field.initailValues]  : formData[field.name]}
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
+                isDisbaled={field?.disable}
               />
             ))}
 
@@ -178,8 +149,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
             {buttons.map((but, index) => {
               return (
                 <div key={index} className='px-2'>
-                  {/* <button className='text-[#5556a6] p-2' onClick={but.onClick}>{but.name}</button>
-                  <span className='p-1.5 bg-[#5556a6] text-white' >{but.label}</span> */}
+          
                   <button className={but.className} onClick={but.onClick}>{but.name}</button>
                   <span className={but.labelClassName} >{but.label}</span>
                 </div>

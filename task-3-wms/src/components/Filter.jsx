@@ -22,7 +22,7 @@ const FilterComponent = () => {
 
     const handleFilterChange = (filterName, option) => {
 
-        const valueToStore = filterName === "manufacturers" || filterName === "molecules" ? option.id : option;
+        const valueToStore = filterName === "manufacturers" || filterName === "molecules" ? option.name : option;
         dispatch(updateFilterOptions({ filterName, value : valueToStore}));
         setDropdownOpen((prev) => ({ ...prev, [filterName]: false }));
     };

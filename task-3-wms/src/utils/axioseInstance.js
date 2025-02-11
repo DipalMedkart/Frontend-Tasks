@@ -12,6 +12,7 @@ axiosInstance.interceptors.request.use(
 
         if(token){
             config.headers['Authorization'] = `Bearer ${token}`
+            config.headers['Location'] = `1`
         }
 
         return config;

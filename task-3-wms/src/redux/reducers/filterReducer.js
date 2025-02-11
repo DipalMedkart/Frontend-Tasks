@@ -33,7 +33,7 @@ export const filterReducer = (state = initialState, action) => {
             return {
                 ...state, loading: false, error: null, filterOptions: { ...state.filterOptions, manufacturers: action.payload.manufacturers || [], molecules: action.payload.molecules || [] }, searchSelections: {
                     ...state.searchSelections,
-                    b2cCategories: action.payload.b2cCategories || []  
+                    b2cCategories: action.payload.b2cPricing || []  
                 }
             };
         case FETCH_FILTER_OPTIONS_FAILURE:

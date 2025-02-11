@@ -20,10 +20,9 @@ const ProductMaster = () => {
         dispatch(fetchSelectOptionsRequest())
     }
 
-    const handleEditClick = (productCode) => {
-        if(productCode){
-
-            router.push(`product-master/edit-product/${productCode}`)
+    const handleEditClick = (productId) => {
+        if(productId){
+            router.push(`product-master/edit-product/${productId}`)
         }else{
             toast.error("This product is not editable")
         }
@@ -38,12 +37,12 @@ const ProductMaster = () => {
         { Label: "Status", fieldKey: "publish_status" },
         {
             customField: (row) => {
-                const productCode = row.product_code;
-                console.log(productCode);
+                const productId = row.product_id;
+                // console.log(productId);
                 // console.log(row);
                 return (
                     <>
-                        <button className="bg-gray-200  text-white px-2 py-1 rounded mr-2" onClick={() => handleEditClick(productCode)}><img src='/edit.png' /></button>
+                        <button className="bg-gray-200  text-white px-2 py-1 rounded mr-2" onClick={() => handleEditClick(productId)}><img src='/edit.png' /></button>
                         <button className="bg-gray-200  text-white px-2 py-1 rounded"><img src='/copy.png' /></button>
                     </>
                 )

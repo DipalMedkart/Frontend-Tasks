@@ -21,14 +21,16 @@
                 "name": "ws_code",
                 "required": true,
                 "type": "number",
-                "placeholder": "Wondersoft Code"
+                "placeholder": "Wondersoft Code",
+                "disable" : true
             },
             {
                 "label": "Product Code",
                 "name": "product_code",
                 "required": true,
                 "type": "number",
-                "placeholder": "Product Code"
+                "placeholder": "Product Code",
+                "disable" : true
             }
         ]
     },
@@ -120,6 +122,17 @@
                         ]
                     },
                     {
+                        "label": "Discontinued",
+                        "name": "is_discontinued",
+                        "required": true,
+                        "disable" : true,
+                        "type": "select",
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
                         "label": "Banned",
                         "name": "is_banned",
                         "required": true,
@@ -128,6 +141,7 @@
                             "Yes",
                             "No"
                         ]
+                       
                     },
                     {
                         "label": "Is Active",
@@ -140,10 +154,60 @@
                         ]
                     },
                     {
-                        "label": "Is Hidden From Alternative",
-                        "name": "is_hidden_from_alternative",
+                        "label": "Is Hidden From Alternative Products",
+                        "name": "is_hidden_from_alternative_products",
                         "required": true,
                         "type": "select",
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
+                        "label": "Rx Required",
+                        "name": "is_rx_required",
+                        "type": "select",
+                        "disable" : true,
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
+                        "label": "Can Sell Online",
+                        "name": "can_sell_online",
+                        "type": "select",
+                        "disable" : true,
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
+                        "label": "Chronic",
+                        "name": "is_chronic",
+                        "type": "select",
+                        "disable" : true,
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
+                        "label": "Refrigerated",
+                        "name": "is_refrigerated",
+                        "type": "select",
+                        "disable" : true,
+                        "providedOptions": [
+                            "Yes",
+                            "No"
+                        ]
+                    },
+                    {
+                        "label": "Scheduled Type Code",
+                        "name": "scheduled_type_code",
+                        "type": "select",
+                        "disable" : true,
                         "providedOptions": [
                             "Yes",
                             "No"
@@ -187,11 +251,11 @@
                         "required": true,
                         "type": "select",
                         "providedOptions" : [
-                            {"key" : "0%", "value" : "0"},
-                            {"key" : "5%", "value" : "5"},
-                            {"key" : "10%", "value" : "10"},
-                            {"key" : "12%", "value" : "12"},
-                            {"key" : "15%", "value" : "15"}
+                            {"key" : "0%", "value" : "0%"},
+                            {"key" : "5%", "value" : "5%"},
+                            {"key" : "10%", "value" :"10%"},
+                            {"key" : "12%", "value" : "12%"},
+                            {"key" : "15%", "value" : "15%"}
                         ]
                     },
                     {
