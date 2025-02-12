@@ -19,7 +19,7 @@ const Table = ({ headers, data, type }) => {
     let productCode ;
     return (
 
-        <div className=" overflow-x-auto w-10/12 mx-auto mt-6">
+        <div className=" overflow-x-auto w-10/12 mx-auto ">
             <table className="shadow-md w-full border-collapse border border-gray-300 table-fixed">
                 <thead>
                     <tr className="bg-gray-200 text-black">

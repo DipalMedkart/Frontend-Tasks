@@ -19,9 +19,9 @@ const Pagination = () => {
         if (page != currentPage) {
             dispatch(setCurrentPage(page));
             if (token) {
-                dispatch(fetchProductRequest(page, sortOption,sortOrder,filterOptions,searchTerm,searchOption, token));
+                dispatch(fetchProductRequest(page, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
             }
-        }  
+        }
     }
 
     const pageNumbers = () => {
@@ -40,8 +40,8 @@ const Pagination = () => {
                 }
             }
 
-            const start = Math.max(2, currentPage - 1);
-            const end = Math.min(totalPages - 1, currentPage + 1);
+            const start = Math.max(1, currentPage - 1);
+            const end = Math.min(totalPages , currentPage + 1);
 
             for (let i = start; i <= end; i++) {
                 pages.push(i);
@@ -66,25 +66,32 @@ const Pagination = () => {
         ));
     }
     return (
-        <div className="flex justify-end mt-4 w-10/12 mx-auto mb-20   ">
-            <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="px-4 py-2 bg-white border border-gray-300 text-[#5556a6] "
-            >
-                Previous
-            </button>
+        <>
+            <div className="flex justify-end mt-4 w-10/12 mx-auto mb-20 pb-4  ">
 
-            {pageNumbers()}
+                {currentPage !== 1 &&
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="px-4 py-2 bg-white border border-gray-300 text-[#5556a6] "
+                    >
+                        Previous
+                    </button>
+                }
 
-            <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-white border border-gray-300 text-[#5556a6] "
-            >
-                Next
-            </button>
-        </div>
+                {pageNumbers()}
+
+                {currentPage !== totalPages &&
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="px-4 py-2 bg-white border border-gray-300 text-[#5556a6] "
+                    >
+                        Next
+                    </button>
+                }
+            </div>
+        </>
     )
 }
 

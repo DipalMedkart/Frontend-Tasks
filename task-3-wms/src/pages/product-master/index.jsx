@@ -8,6 +8,7 @@ import { fetchSelectOptionsRequest } from '@/redux/actions/selectOptionsAction';
 import Table from '@/components/Table';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import auth from '@/hoc/auth';
 
 const ProductMaster = () => {
 
@@ -21,9 +22,9 @@ const ProductMaster = () => {
     }
 
     const handleEditClick = (productId) => {
-        if(productId){
+        if (productId) {
             router.push(`product-master/edit-product/${productId}`)
-        }else{
+        } else {
             toast.error("This product is not editable")
         }
     }
@@ -51,7 +52,7 @@ const ProductMaster = () => {
     ];
     return (
         <>
-            <div className="w-10/12 mx-auto py-5 shadow-lg rounded-lg bg-white">
+            <div className="w-10/12 mx-auto py-5  rounded-lg bg-white">
                 <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-semibold text-black">Product Master</h1>
                     <Link href="/product-master/add-product">
@@ -61,13 +62,18 @@ const ProductMaster = () => {
                     </Link>
                 </div>
             </div>
-            <Options />
-            {/* <ProductsTable /> */}
-            <Table headers={headers} data={products} />
-            <Pagination />
+            <div className='shadow-md  mx-auto'>
+
+
+                <Options />
+                {/* <ProductsTable /> */}
+                <Table headers={headers} data={products} />
+                <Pagination />
+
+            </div>
         </>
     );
 
 }
 
-export default ProductMaster
+export default auth(ProductMaster)

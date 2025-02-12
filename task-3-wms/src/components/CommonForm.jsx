@@ -23,7 +23,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
   // console.log(JSONData);
 
   // const selectedType = formData.product_type;
-  console.log(formData);
+  // console.log(formData);
   // console.log(selectedType);
 
   const generalFields = JSONData.find(item => item.category === "general")?.fields || [];
@@ -47,6 +47,13 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
   const sectionFields = selectedSectionData?.fields || [];
   // console.log(sectionFields);
 
+
+  const getNestedValue = (onject, path) => {
+    return path?.split('.').reduce((acc, key) => acc?.[key], onject) ?? "";
+  };
+
+
+
   if (loading) {
     return (
       <div>Loading...</div>
@@ -65,7 +72,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
 
           <div className='mb-10'>
 
-       
+
 
             {generalFields.map((field, index) => (
               <InputField
@@ -77,7 +84,15 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
-                value={formData[field.initailValues] ? formData[field.initailValues]  : formData[field.name]}
+                // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
+                // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
+                value={
+                  typeof getNestedValue(formData, field.initialValue) === "boolean"
+                    ? getNestedValue(formData, field.initialValue)
+                      ? "Yes"
+                      : "No"
+                    : getNestedValue(formData, field.initialValue) || formData[field.name] || ""
+                }
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
@@ -96,7 +111,15 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 optionLabel={field.optionLabel}
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
                 // value={formData[field.name] ?? ""}
-                value={formData[field.initailValues] ? formData[field.initailValues]  : formData[field.name]}
+                // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
+                // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
+                value={
+                  typeof getNestedValue(formData, field.initialValue) === "boolean"
+                    ? getNestedValue(formData, field.initialValue)
+                      ? "Yes"
+                      : "No"
+                    : getNestedValue(formData, field.initialValue) || formData[field.name] || ""
+                }
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
@@ -133,7 +156,15 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
                 onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
-                value={formData[field.initailValues] ? formData[field.initailValues]  : formData[field.name]}
+                // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
+                // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
+                value={
+                  typeof getNestedValue(formData, field.initialValue) === "boolean"
+                    ? getNestedValue(formData, field.initialValue)
+                      ? "Yes"
+                      : "No"
+                    : getNestedValue(formData, field.initialValue) || formData[field.name] || ""
+                }
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
@@ -144,12 +175,12 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
         </form>
         <div className='py-2 w-full flex justify-end'>
           <div className='flex items-center border border-[#5556a6] rounded-md w-fit mr-4'>
-          
+
 
             {buttons.map((but, index) => {
               return (
                 <div key={index} className='px-2'>
-          
+
                   <button className={but.className} onClick={but.onClick}>{but.name}</button>
                   <span className={but.labelClassName} >{but.label}</span>
                 </div>

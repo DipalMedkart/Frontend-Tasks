@@ -15,7 +15,10 @@ function* fetchProducts(action) {
             Authorization: `Bearer ${action.payload.token}`,
             
         }
-        const { sortOption, page,sortOrder, filterOptions, searchQuery, searchOption, } = action.payload; 
+        const { sortOption, page,sortOrder, filterOptions, searchQuery, searchOption, searchTerm} = action.payload; 
+        console.log("search query " + searchQuery);
+        console.log("search term " + searchTerm);
+
         const params = new URLSearchParams();
 
         if (sortOption){
@@ -48,13 +51,7 @@ function* fetchProducts(action) {
 
 
         const response = yield call(axios.get, `${BASIC_URL}/master/products/unpublished?${params.toString()}`, {
-            // params: {
-            //     sort_by: sortBy ? `${sortBy},${sortOrder}` : '',
-            //     page: page,
-            //     filter_by: filterBy ? filterBy : '',
-            //     search: searchQuery ? searchQuery : '',
-            // },
-         
+          
             headers
           
         })

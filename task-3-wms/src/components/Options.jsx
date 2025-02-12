@@ -32,6 +32,7 @@ const Options = () => {
     const [sortVisible, setSortVisible] = useState(false);
 
     const handleSearchChange = (e) => {
+        console.log(e.target.value);
         dispatch(setSearchTerm(e.target.value));
         dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
     };
@@ -79,7 +80,7 @@ const Options = () => {
 
     return (
         <>
-            <div className="flex justify-between py-4 w-10/12 mx-auto shadow-lg ">
+            <div className="flex justify-between py-4 w-10/12 mx-auto mb-0 ">
                 <div className="flex items-center">
                     <div className='flex items-center border border-gray-300 h-10 w-80'>
 

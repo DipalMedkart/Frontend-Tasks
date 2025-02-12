@@ -30,60 +30,6 @@ function* AddProduct(action) {
         });
 
 
-
-
-        formData = {
-            ...formData,
-            is_discontinued: false,
-            can_sell_online: true,
-            is_chronic: false,
-            is_refrigerated: false,
-            is_rx_required: true,
-            mrp : Number(action.payload.mrp),
-
-            is_hidden_from_alternative_products: action.payload.is_hidden_from_alternative_products === "Yes",
-            // product_code : Number(action.payload.product_code),
-
-            packaging_units: {
-                dosage_form: action.payload.dosage_form || "",
-                package_type: action.payload.package_type || "",
-                uom: action.payload.uom || "",
-                package_size: action.payload.package_size || "",
-            },
-
-            combination: {
-                molecules: action.payload.molecules ? [action.payload.molecules.id] : [],
-            },
-
-            manufacturer: { id: action.payload.manufacturers?.id, name: action.payload.manufacturers?.name },
-
-            transaction_units: {
-                sales_unit: action.payload.sales_unit || "",
-                purchase_unit: action.payload.purchase_unit || "",
-                transfer_unit: action.payload.transfer_unit || "",
-            },
-
-            taxes: {
-                hsn_code: (action.payload.hsn_code) || 0,
-                gst_type: (action.payload.gst_type) || 0,
-            },
-
-            sales_category: {
-                b2b_category: action.payload.b2b_category || "",
-                b2c_category: action.payload["b2c-template"]?.id || "",
-                sales_trend_category: action.payload.sales_trend_category || "",
-                return_type: action.payload.product_return_type || "",
-                b2c_in: 0,
-                b2c_out: 120,
-                franchise_in: 180,
-                franchise_out: 210,
-                purchase: 180,
-                purchase_return: 90,
-                scheduled_type_code: "Schedule"
-
-            },
-        };
-
         const optimizedFormData = {
             product_name: action.payload.product_name,
             product_type: action.payload.product_type,
@@ -122,7 +68,7 @@ function* AddProduct(action) {
 
             taxes: {
                 hsn_code: (action.payload.hsn_code) || 0,
-                gst_type: action.payload.gst_type || "", // Keep as string if needed
+                gst_type: action.payload.gst_type || "", 
             },
 
             sales_category: {

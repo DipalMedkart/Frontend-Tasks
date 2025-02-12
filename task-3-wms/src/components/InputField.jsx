@@ -26,7 +26,7 @@ export const InputField = ({
   const masterData = useSelector((state) => state.selectOptions.selectOptions);
   const options = masterData?.[optionLabel] || [];
 
-  const [selectedValue, setSelectedValue] = useState("");
+
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [searchResults, setSearchResults] = useState({});
   const [searchQueries, setSearchQueries] = useState({});
@@ -45,7 +45,7 @@ export const InputField = ({
   const manufacturers = filterOptions.manufacturers || [];
   const molecules = filterOptions.molecules || [];
   const b2cCategories = searchSelections.b2cCategories || [];
- 
+
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
@@ -137,8 +137,9 @@ export const InputField = ({
                 ✕
               </button>
             )}
-            {searchResults[name]?.length > 0 && (
+            {/* {searchResults[name]?.length > 0 && (
               <ul className="absolute w-full bg-white border border-gray-200 rounded mt-1 z-10 max-h-40 overflow-auto">
+                
                 {searchResults[name]?.map((option, index) => (
                   <li
                     key={index}
@@ -148,6 +149,23 @@ export const InputField = ({
                     {option.name ?? option}
                   </li>
                 ))}
+              </ul>
+            )} */}
+            {searchQueries[name] && (
+              <ul className="absolute w-full bg-white border border-gray-200 rounded mt-1 z-10 max-h-40 overflow-auto">
+                {searchResults[name]?.length > 0 ? (
+                  searchResults[name].map((option, index) => (
+                    <li
+                      key={index}
+                      className="px-2 py-1 cursor-pointer hover:bg-gray-100 text-black"
+                      onClick={() => handleOptionSelect(option)}
+                    >
+                      {option.name ?? option}
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-gray-500 text-center p-2">No Results</li>
+                )}
               </ul>
             )}
 

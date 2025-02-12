@@ -5,6 +5,7 @@ import { fetchProductDetailsRequest, updateField, setSelectedSection, resetForm 
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import formJSON from '../../../data/formData'
+import auth from '@/hoc/auth';
 
 
 
@@ -25,6 +26,7 @@ const EditProduct = () => {
   const buttons = [
     { name: "SAVE", label: "F9", onClick: () => handleSubmit(), className: "text-[#5556a6] p-2", labelClassName: "p-1.5 bg-[#5556a6] text-white" },
 
+
   ];
 
   const titleButton = { label: "Close", onClick: () => handleClose() }
@@ -39,6 +41,11 @@ const EditProduct = () => {
   // console.log(code);
   const formData = useSelector((state) => state.form.formData);
   console.log(formData);
+
+  console.log(formData.manufacturer);
+  console.log(formData.taxes);
+
+
 
   const selectedType = formData.product_type;
   console.log(selectedType);
@@ -59,6 +66,8 @@ const EditProduct = () => {
   }
 
 
+
+
   return (
     <div className='w-10/12 mx-auto'>
 
@@ -66,10 +75,10 @@ const EditProduct = () => {
       <div className="py-2 mt-2">
 
 
-        <CommonForm title="Edit Product" initailValues={formData} JSONData={formJSON} buttons={buttons} titleButton={titleButton} handleChange={handleChange} onFormSubmit={handleSubmit} selectedType={selectedType} handleSelectedSection={handleSelectedSection}/>
+        <CommonForm title="Edit Product" initailValues={formData} JSONData={formJSON} buttons={buttons} titleButton={titleButton} handleChange={handleChange} onFormSubmit={handleSubmit} selectedType={selectedType} handleSelectedSection={handleSelectedSection} />
       </div>
     </div>
   )
 }
 
-export default EditProduct;
+export default auth(EditProduct);

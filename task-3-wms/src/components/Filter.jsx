@@ -39,7 +39,7 @@ const FilterComponent = () => {
     
 
     return (
-        <div className="flex justify-between py-4 w-10/12 mx-auto rounded-md bg-white shadow-lg">
+        <div className="flex justify-between pb-4 w-10/12 mx-auto rounded-md bg-white ">
             <div className="flex space-x-4">
                 {Object.keys(filterOptions).map((key) => (
                     <div key={key} className="relative">
@@ -66,7 +66,7 @@ const FilterComponent = () => {
                         </button>
 
                         {dropdownOpen[key] && (
-                            <div className="absolute left-0 top-12 bg-white shadow-md p-2 border border-gray-300 rounded-md w-80 z-10">
+                            <div className="absolute left-0 top-12 bg-white  p-2 border border-gray-300 rounded-md w-80 z-10">
                                 {key === "manufacturers" || key === "molecules" ? (
                                     <input
                                         type="text"

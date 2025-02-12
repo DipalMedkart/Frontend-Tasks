@@ -7,14 +7,16 @@
                 "name": "product_name",
                 "required": true,
                 "type": "text",
-                "placeholder": "Product name"
+                "placeholder": "Product name",
+                "initialValue" : "product_name"
             },
             {
                 "label": "Product Type",
                 "name": "product_type",
                 "required": true,
                 "type": "select",
-                "optionLabel": "product_type"
+                "optionLabel": "product_type",
+                "initialValue" : "product_type"
             },
             {
                 "label": "Wondersoft Code",
@@ -22,7 +24,9 @@
                 "required": true,
                 "type": "number",
                 "placeholder": "Wondersoft Code",
-                "disable" : true
+                "disable" : true,
+                "initialValue" : "ws_code"
+
             },
             {
                 "label": "Product Code",
@@ -30,7 +34,8 @@
                 "required": true,
                 "type": "number",
                 "placeholder": "Product Code",
-                "disable" : true
+                "disable" : true,
+                "initialValue" : "product_code"
             }
         ]
     },
@@ -45,14 +50,16 @@
                 "required": true,
                 "type": "select",
                 "hasSearch" : true,
-                "placeholder": ""
+                "placeholder": "",
+                "initialValue" : "manufacturer.name"
             },
             {
                 "label": "MRP",
                 "name": "mrp",
                 "required": true,
                 "type": "number",
-                "placeholder": "MRP"
+                "placeholder": "MRP",
+                "initialValue" : "mrp"
             }
         ],
         "sections": [
@@ -66,28 +73,32 @@
                         "name": "dosage_form",
                         "required": true,
                         "type": "select",
-                        "optionLabel": "dosage_form"
+                        "optionLabel": "dosage_form",
+                        "initialValue" : "packaging_units.dosage_form"
                     },
                     {
                         "label": "Package Type",
                         "name": "package_type",
                         "required": true,
                         "type": "select",
-                        "optionLabel": "package_type"
+                        "optionLabel": "package_type",
+                        "initialValue" : "packaging_units.package_type"
                     },
                     {
                         "label": "UOM",
                         "name": "uom",
                         "required": true,
                         "type": "select",
-                        "optionLabel": "uom"
+                        "optionLabel": "uom",
+                        "initialValue" : "packaging_units.uom"
                     },
                     {
                         "label": "Package Size",   
                         "name": "package_size",
                         "required": true,
                         "type": "number",
-                        "placeholder": "Package Size"
+                        "placeholder": "Package Size",
+                        "initialValue" : "packaging_units.package_size"
                     }
                 ]
             },
@@ -102,7 +113,8 @@
                         "required": true,
                         "hasSearch" : true,
                         "type": "select",
-                        "optionLabel": ""
+                        "optionLabel": "",
+                        "initialValue" : "combination.molecules"
                     }
                 ]
             },
@@ -119,18 +131,20 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_assured"
                     },
                     {
                         "label": "Discontinued",
                         "name": "is_discontinued",
                         "required": true,
-                        "disable" : true,
+                        "disable" : false,
                         "type": "select",
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_discontinued"
                     },
                     {
                         "label": "Banned",
@@ -140,7 +154,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_banned"
                        
                     },
                     {
@@ -151,7 +166,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_active"
                     },
                     {
                         "label": "Is Hidden From Alternative Products",
@@ -161,7 +177,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_hidden_from_alternative_products"
                     },
                     {
                         "label": "Rx Required",
@@ -171,7 +188,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_rx_required"
                     },
                     {
                         "label": "Can Sell Online",
@@ -181,7 +199,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "can_sell_online"
                     },
                     {
                         "label": "Chronic",
@@ -191,7 +210,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_chronic"
                     },
                     {
                         "label": "Refrigerated",
@@ -201,7 +221,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "is_refrigerated"
                     },
                     {
                         "label": "Scheduled Type Code",
@@ -211,7 +232,8 @@
                         "providedOptions": [
                             "Yes",
                             "No"
-                        ]
+                        ],
+                        "initialValue" : "scheduled_type_code"
                     }
                 ]
             },
@@ -224,19 +246,22 @@
                         "label": "Purchase Unit",
                         "name": "purchase_unit",
                         "required": false,
-                        "type": "number"
+                        "type": "number",
+                        "initialValue" : "transaction_units.purchase_unit"
                     },
                     {
                         "label": "Transfer Unit",
                         "name": "transfer_unit",
                         "required": false,
-                        "type": "number"
+                        "type": "number",
+                        "initialValue" : "transaction_units.transfer_unit"
                     },
                     {
                         "label": "Sales Unit",
                         "name": "sales_unit",
                         "required": false,
-                        "type": "number"
+                        "type": "number",
+                        "initialValue" : "transaction_units.sales_unit"
                     }
                 ]
             },
@@ -256,13 +281,15 @@
                             {"key" : "10%", "value" :"10%"},
                             {"key" : "12%", "value" : "12%"},
                             {"key" : "15%", "value" : "15%"}
-                        ]
+                        ],
+                        "initialValue" : "taxes.gst_type"
                     },
                     {
                         "label": "HSN Code",
                         "name": "hsn_code",
                         "required": true,
-                        "type": "number"
+                        "type": "number",
+                        "initialValue" : "taxes.hsn_code"
                     }
                 ]
             },
@@ -276,28 +303,32 @@
                         "name": "b2b_category",
                         "required": true,
                         "type": "select",
-                        "optionLabel": "b2b_category"
+                        "optionLabel": "b2b_category",
+                        "initialValue" : "sales_category.b2b_category"
                     },
                     {
                         "label": "B2C Product type",
                         "name": "b2c-template",
                         "hasSearch" : true,
                         "required": true,
-                        "type": "select"
+                        "type": "select",
+                        "initialValue" : "sales_category.b2b_category.category_name"
                     },
                     {
                         "label": "Sales Trend Category",
                         "name": "sales_trend_category",
                         "required": true,
                         "type": "select",
-                        "optionLabel": "sales_trend_category"
+                        "optionLabel": "sales_trend_category",
+                        "initialValue" : "sales_category.sales_trend_category"
                     },
                     {
                         "label": "Return Type",
                         "name": "product_return_type",
                         "required": true,
                         "type": "select",
-                        "optionLabel": "product_return_type"
+                        "optionLabel": "product_return_type",
+                        "initialValue" : "sales_category.return_type"
                     }
                 ]
             },
@@ -311,14 +342,16 @@
                         "name": "mis_reporting_category",
                         "required": false,
                         "type": "select",
-                        "optionLabel": "mis_reporting_category"
+                        "optionLabel": "mis_reporting_category",
+                        "initialValue" : "mis_reporting_category"
                     },
                     {
                         "label": "WH Category",
                         "name": "mis_warehouse_category",
                         "required": false,
                         "type": "select",
-                        "optionLabel": "mis_warehouse_category"
+                        "optionLabel": "mis_warehouse_category",
+                        "initialValue" : "mis_warehouse_category"
                     }
                 ]
             }

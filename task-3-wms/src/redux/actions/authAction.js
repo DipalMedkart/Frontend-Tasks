@@ -23,7 +23,7 @@ export const loginFailure = (error) => ({
 
 export const loginRequest = (payload) =>
 {
-    console.log('payloaddd login request',payload)
+    // console.log('payloaddd login request',payload)
     return{
         type: LOGIN_REQUEST,
         payload: payload

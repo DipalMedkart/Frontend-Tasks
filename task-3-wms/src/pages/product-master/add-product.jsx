@@ -12,6 +12,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box';
 import { submitFormRequest } from '@/redux/actions/formAction';
 import { useRouter } from 'next/router';
+import auth from '@/hoc/auth';
 
 
 
@@ -25,15 +26,17 @@ const AddProduct = () => {
   const selectedSection = useSelector((state) => state.form.selectedSection);
   const router = useRouter()
 
+  
+
   const selectedType = formData.product_type;
   console.log(formData);
   console.log(selectedType);
 
   useEffect(() => {
     dispatch(resetForm())
-  },[])
+  }, [])
 
-  
+
   const handleChange = (name, value) => {
 
     dispatch(updateField(name, value));
@@ -44,11 +47,12 @@ const AddProduct = () => {
   }
 
   const handleSubmit = () => {
-  
+
     dispatch(submitFormRequest(formData))
   };
 
   const handleReset = () => {
+    router.push('/product-master')
     dispatch(resetForm());
   };
 
@@ -59,7 +63,7 @@ const AddProduct = () => {
 
   ];
 
-  const titleButton = { label: "Close", onClick: () => router.push('/product-master') }
+  const titleButton = { label: "Close", onClick: () => handleReset() }
 
 
   if (loading) {
@@ -85,4 +89,4 @@ const AddProduct = () => {
   );
 }
 
-export default AddProduct;  
+export default auth(AddProduct);  

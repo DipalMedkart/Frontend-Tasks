@@ -43,7 +43,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="flex bg-white p-3 px-20 shadow-lg mb-4">
+        <div className="flex bg-white p-3 px-20 shadow-md mb-4">
             <div className="flex  space-x-4 ml-16"> 
                 {buttons.map((button, index) => (
                     <Button
