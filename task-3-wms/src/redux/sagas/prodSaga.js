@@ -30,8 +30,11 @@ function* fetchProducts(action) {
         // if (filterBy) {
         //     params.append('filter_by', filterBy);
         // }
-        if (searchQuery) {
-            params.append('search', `${searchQuery},${searchOption}`);
+        // if (searchQuery) {
+        //     params.append('search', `${searchQuery},${searchOption}`);
+        // }
+        if (searchTerm) {
+            params.append('search', `${searchTerm},${searchOption}`);
         }
         if (filterOptions.is_assured) {
             params.append('is_assured', filterOptions.is_assured);

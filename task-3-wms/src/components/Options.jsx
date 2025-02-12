@@ -17,7 +17,7 @@ const Options = () => {
     const searchOption = useSelector((state) => state.prod.searchOption)
     const selectedFilters = useSelector((state) => state.filter.selectedFilters);
 
-    console.log(selectedFilters);
+    // console.log(selectedFilters);
     const { isAssured, isRegistered, status, manufacturers, molecules } = selectedFilters;
 
     const filterOptions = {
@@ -32,9 +32,12 @@ const Options = () => {
     const [sortVisible, setSortVisible] = useState(false);
 
     const handleSearchChange = (e) => {
-        console.log(e.target.value);
-        dispatch(setSearchTerm(e.target.value));
-        dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
+        const value = e.target.value
+        // console.log(e.target.value);
+        console.log(value);
+        dispatch(setSearchTerm(value));
+        console.log(searchTerm);
+        // dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
     };
 
     const toggleFilter = () => {
@@ -73,9 +76,10 @@ const Options = () => {
         dispatch(setSearchOption(e.target.value));
     }
 
+
     useEffect(() => {
         dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
-    }, [])
+    }, [searchTerm, sortOption, sortOrder, JSON.stringify(filterOptions)]);
 
 
     return (
@@ -84,7 +88,7 @@ const Options = () => {
                 <div className="flex items-center">
                     <div className='flex items-center border border-gray-300 h-10 w-80'>
 
-                        <img src="/search.png" alt="" className='ml-2 py-0'/>
+                        <img src="/search.png" alt="" className='ml-2 py-0' />
                         <input
                             type="text"
                             value={searchTerm}
@@ -140,13 +144,13 @@ const Options = () => {
                                 <option value="modified" className='text-black'>Updated at</option>
                             </select>
 
-                            <label className="block text-sm font-medium mb-1">Sort Order:</label>
+                            <label className="block text-sm font-medium mb-1 text-black">Sort Order:</label>
                             <div className="flex items-center space-x-4 mb-3 ">
                                 <label className="flex items-center text-black">
                                     <input
                                         type="radio"
                                         value="ascending"
-                                        checked={sortOrder === "ascending"}
+                                        checked={sortOrder === "a"}
                                         onChange={handleSortOrderChange}
                                         className="mr-2 bg-black"
                                     />
@@ -156,13 +160,15 @@ const Options = () => {
                                     <input
                                         type="radio"
                                         value="descending"
-                                        checked={sortOrder === "descending"}
+                                        checked={sortOrder === "d"}
                                         onChange={handleSortOrderChange}
                                         className="mr-2"
                                     />
                                     Descending
                                 </label>
                             </div>
+
+
 
                             <div className="flex justify-end space-x-3">
                                 <button
@@ -184,24 +190,7 @@ const Options = () => {
             </div>
 
 
-            {filterVisible && (
-                // <div className="flex justify-between py-4 w-10/12 mx-auto rounded-md bg-white shadow-lg">
-
-                //     <div className="flex space-x-4">
-                //         {Array.from({ length: 5 }, (_, index) => (
-                //             <select key={index} className="p-2 border border-gray-300 text-black h-10">
-                //                 Select it bro 
-                //                 <option value="">Select Filter {index + 1}</option>
-                //                 <option value="option1">Option 1</option>
-                //                 <option value="option2">Option 2</option>
-                //                 <option value="option3">Option 3</option>
-                //             </select>
-                //         ))}
-                //     </div>
-                // </div>
-                // <FilterComponent/>
-                <Filter />
-            )}
+            {filterVisible && <Filter />}
 
 
         </>

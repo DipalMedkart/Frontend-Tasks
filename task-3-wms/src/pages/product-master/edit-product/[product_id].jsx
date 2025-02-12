@@ -29,7 +29,7 @@ const EditProduct = () => {
 
   ];
 
-  const titleButton = { label: "Close", onClick: () => handleClose() }
+  const titleButton = { label: "✕", onClick: () => handleClose() }
 
 
   useEffect(() => {

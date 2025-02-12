@@ -12,7 +12,6 @@ const initialState = {
     sortOption: 'created',
     sortOrder : 'd',    
     currentPage : 1,
-
 }
 
 export const productReducer = (state = initialState, action) => {

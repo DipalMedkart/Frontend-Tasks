@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFilterOptionsRequest, updateFilterOptions, resetFilter, updateSearchQuery } from "../redux/actions/filterAction";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { setCurrentPage } from "@/redux/actions/prodAction";
 
 const FilterComponent = () => {
     const dispatch = useDispatch();
@@ -22,8 +23,12 @@ const FilterComponent = () => {
 
     const handleFilterChange = (filterName, option) => {
 
-        const valueToStore = filterName === "manufacturers" || filterName === "molecules" ? option.name : option;
-        dispatch(updateFilterOptions({ filterName, value : valueToStore}));
+        // const valueToStore = filterName === "manufacturers" || filterName === "molecules" ? option.id : option;
+        const valueToStore = {
+            id :  filterName === "manufacturers" || filterName === "molecules" ? option.id : option,
+            name : option.name || option,
+        }
+        dispatch(updateFilterOptions({ filterName, value : valueToStore.id}));
         setDropdownOpen((prev) => ({ ...prev, [filterName]: false }));
     };
 
@@ -34,6 +39,7 @@ const FilterComponent = () => {
 
     const handleReset = () => {
         dispatch(resetFilter());
+        dispatch(setCurrentPage(1))
     };
 
     
@@ -46,7 +52,7 @@ const FilterComponent = () => {
                         <button
                             onClick={() => toggleDropdown(key)}
                             // onMouseOver={() => toggleDropdown(key)}
-                            className="p-2 border border-gray-300 text-black rounded-md flex items-center" 
+                            className="p-2 border border-gray-300 text-black rounded-full flex items-center px-4" 
                         >
                             {selectedFilters[key] ? (
                                 <div className="flex flex-wrap"> 

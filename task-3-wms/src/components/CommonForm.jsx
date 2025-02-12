@@ -63,7 +63,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
     <div className='shadow-lg shadow-blue-100 mt-2'>
       <div className="flex flex-row items-center justify-between h-20 border-b border-gray-200 px-4 ">
         <h3 className='text-black text-2xl'>{title}</h3>
-        <button className='text-black' onClick={titleButton.onClick}>{titleButton.label}</button>
+        <button className='text-black text-2xl' onClick={titleButton.onClick}>{titleButton.label}</button>
       </div>
 
 

@@ -1,10 +1,10 @@
 import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_REQUEST, SET_FILTER_OPTION, SET_SEARCH_OPTION, SET_SEARCH_TERM, SET_SORT_OPTION, SET_SORT_ORDER, SET_CURRENT_PAGE } from "../constant";
 
-export const fetchProductRequest = (page, sortOption, sortOrder, filterOptions, searchQuery, searchOption, token) => {
+export const fetchProductRequest = (page, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token) => {
 
     return ({
         type: FETCH_PRODUCTS_REQUEST,
-        payload: { page, sortOption, sortOrder, filterOptions, searchQuery, searchOption, token },
+        payload: { page, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token },
     })
 
 }

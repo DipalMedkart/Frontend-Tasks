@@ -63,7 +63,7 @@ const AddProduct = () => {
 
   ];
 
-  const titleButton = { label: "Close", onClick: () => handleReset() }
+  const titleButton = { label: "✕", onClick: () => handleReset() }
 
 
   if (loading) {

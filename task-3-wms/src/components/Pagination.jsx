@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect , useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentPage, fetchProductRequest } from '@/redux/actions/prodAction'
 
@@ -10,19 +10,43 @@ const Pagination = () => {
     const sortOption = useSelector((state) => state.prod.sortOption)
     const sortOrder = useSelector((state) => state.prod.sortOrder)
     const searchTerm = useSelector((state) => state.prod.searchTerm);
-    const filterOptions = useSelector((state) => state.prod.filterOptions);
+    // const filterOptions = useSelector((state) => state.prod.filterOptions);     
+    const selectedFilters = useSelector((state) => state.filter.selectedFilters);
     const searchOption = useSelector((state) => state.prod.searchOption);
-    console.log(token);
-    const dispatch = useDispatch()
+    // const [appliedFilters, setAppliedFilters] = useState(filterOptions);
 
+    // console.log(appliedFilters);
+    // console.log(selectedFilters);
+
+    const { isAssured, isRegistered, status, manufacturers, molecules } = selectedFilters;
+
+    const filterOptions = {
+        is_assured: isAssured || null,
+        is_refrigerated: isRegistered || null,
+        publish_status: status || null,
+        manufacturer: manufacturers || null,
+        combination: molecules || null
+    }
+    // console.log(token);
+    const dispatch = useDispatch()
+    
     const handlePageChange = (page) => {
         if (page != currentPage) {
             dispatch(setCurrentPage(page));
-            if (token) {
-                dispatch(fetchProductRequest(page, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
-            }
+            // if (token) {
+            //     dispatch(fetchProductRequest(page, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
+            // }
         }
     }
+    
+
+    
+    useEffect(() => {
+        
+            dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
+        
+    }, [currentPage]);
+    // console.log(filterOptions);
 
     const pageNumbers = () => {
         const pages = [];
