@@ -2,6 +2,7 @@
 import { useRouter } from 'next/router';
 import DashboardBar from './DashboardBar';
 import Navbar from './Navbar';
+import BreadCrumbs from './BreadCrumbs';
 
 const Layout = ({ children }) => {
     const router = useRouter();
@@ -11,6 +12,7 @@ const Layout = ({ children }) => {
         <div>
             {!isLoginPage && <DashboardBar />}
             {!isLoginPage && <Navbar />}
+            {!isLoginPage && <BreadCrumbs />}
             <main>{children}</main>
         </div>
     );

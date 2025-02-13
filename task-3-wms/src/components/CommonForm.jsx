@@ -21,6 +21,10 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
   const error = useSelector((state) => state.form.error);
   const selectedSection = useSelector((state) => state.form.selectedSection);
 
+  
+
+  
+
 
   const router = useRouter();
   const isEditMode = !!router.query.product_id;
@@ -240,7 +244,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
               )
             })}
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   )

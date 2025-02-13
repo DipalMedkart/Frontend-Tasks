@@ -13,12 +13,11 @@ import auth from "@/hoc/auth";
     <>
       
       <div className="flex items-left  h-screen bg-white w-10/12 mx-auto">
-        <h1 className="text-3xl font-semibold text-gray-800  my-10">
+        <h1 className="text-3xl font-semibold text-gray-800 my-4">
           Welcome, <span className="text-[#5556a6]">{name ? name : "User"}!</span>
         </h1>
       </div>
     </>
   )
 }
-// export default auth(Home)
-export default Home
+export default auth(Home)

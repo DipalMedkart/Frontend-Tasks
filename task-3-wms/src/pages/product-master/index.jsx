@@ -52,7 +52,7 @@ const ProductMaster = () => {
     ];
     return (
         <>
-            <div className="w-10/12 mx-auto py-5  rounded-lg bg-white">
+            <div className="w-10/12 mx-auto py-2.5  rounded-lg bg-white">
                 <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-semibold text-black">Product Master</h1>
                     <Link href="/product-master/add-product">

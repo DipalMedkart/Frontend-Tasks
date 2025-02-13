@@ -16,7 +16,7 @@ const Table = ({ headers, data, type }) => {
         }
     }
 
-    let productCode ;
+    
     return (
 
         <div className=" overflow-x-auto w-10/12 mx-auto ">
@@ -35,7 +35,7 @@ const Table = ({ headers, data, type }) => {
                         data.map((row, rindex) => (
                             <tr key={rindex} className="hover:bg-gray-100 transition">
                                 {headers.map((cell, cindex) => (
-                                    <td key={cindex} className="border border-gray-300 px-4 py-2 text-black overflow-hidden text-ellipsis whitespace-nowrap min-w-max">
+                                    <td key={cindex} className="border border-gray-300 px-4 py-2 text-black overflow-hidden text-ellipsis whitespace-nowrap min-w-max ">
                                         {/* {cell.fieldKey === "product_code" ? (productCode = row[cell.fieldKey]) : null} */}
 
                                         {cell.fieldKey === "publish_status" ? (
