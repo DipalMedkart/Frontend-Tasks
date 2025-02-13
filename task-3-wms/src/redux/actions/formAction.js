@@ -1,5 +1,5 @@
 
-import { UPDATE_FIELD, RESET_FORM, SUBMIT_FORM, SUBMIT_FORM_SUCCESS, SUBMIT_FORM_FAILURE, SET_SELECTED_SECTION, SUBMIT_FORM_REQUEST, SET_FORM_DATA, FETCH_PRODUCT_DETAILS_FAILURE, FETCH_PRODUCT_DETAILS_SUCCESS, FETCH_PRODUCT_DETAILS_REQUEST } from "../constant";
+import { UPDATE_FIELD, RESET_FORM, SUBMIT_FORM, SUBMIT_FORM_SUCCESS, SUBMIT_FORM_FAILURE, SET_SELECTED_SECTION, SUBMIT_FORM_REQUEST, SET_FORM_DATA, FETCH_PRODUCT_DETAILS_FAILURE, FETCH_PRODUCT_DETAILS_SUCCESS, FETCH_PRODUCT_DETAILS_REQUEST, UPDATE_PRODUCT_REQUEST } from "../constant";
 
 export const updateField = (name, value) => ({
     type: UPDATE_FIELD,
@@ -52,4 +52,9 @@ export const fetchProductDetailsSuccess = (data) => ({
 export const fetchProductDetailsFailure = (error) => ({
     type: FETCH_PRODUCT_DETAILS_FAILURE,
     payload: error,
+});
+
+export const updateProductRequest = ({product_id,data}) => ({
+    type: UPDATE_PRODUCT_REQUEST,
+    payload: {product_id,data},
 });

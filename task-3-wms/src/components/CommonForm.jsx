@@ -7,18 +7,24 @@ import { updateField, resetForm, submitForm, setSelectedSection } from '@/redux/
 import { useSelector } from 'react-redux';
 import { InputField } from './InputField';
 import formJSON from '../data/formData.json'
+import { useRouter } from 'next/router';
 
 
 
 
-const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, handleSelectedSection, buttons, onFormSubmit, initailValues }) => {
+const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, handleSelectedSection, buttons, onFormSubmit, initailValues, formData }) => {
 
 
   const dispatch = useDispatch();
-  const formData = useSelector((state) => state.form.formData);
+  // const formData = useSelector((state) => state.form.formData);
   const loading = useSelector((state) => state.form.loading);
   const error = useSelector((state) => state.form.error);
   const selectedSection = useSelector((state) => state.form.selectedSection);
+
+
+  const router = useRouter();
+  const isEditMode = !!router.query.product_id;
+  console.log(isEditMode);
 
   // console.log(JSONData);
 
@@ -48,9 +54,28 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
   // console.log(sectionFields);
 
 
-  const getNestedValue = (onject, path) => {
-    return path?.split('.').reduce((acc, key) => acc?.[key], onject) ?? "";
+  // const getNestedValue = (object, path) => {
+
+  //   return path?.split('.').reduce((acc, key) => acc?.[key], object) ?? "";
+  // };
+
+
+  const getNestedValue = (object, path) => {
+    // console.log("🔍 Debugging getNestedValue");
+    // console.log("Object:", object);
+    // console.log("Path:", path);
+
+    if (!path) return "";
+
+    const result = path.split('.').reduce((acc, key) => {
+      // console.log(`Accessing key: ${key}, Current Value:`, acc?.[key]); 
+      return acc?.[key];
+    }, object);
+
+    // console.log("Final Result:", result);
+    return result ?? "";
   };
+
 
 
 
@@ -83,7 +108,9 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 required={field.required}
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
-                onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
+                // onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
+                onChange={(e) => handleChange(isEditMode ? field.initialValue : field.name, e.target?.value ?? e)}
+
                 // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
                 // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
                 value={
@@ -91,7 +118,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                     ? getNestedValue(formData, field.initialValue)
                       ? "Yes"
                       : "No"
-                    : getNestedValue(formData, field.initialValue) || formData[field.name] || ""
+                    : getNestedValue(formData, field.initialValue) ?? formData[field.name] ?? ""
                 }
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
@@ -109,7 +136,9 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 required={field.required}
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
-                onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
+                // onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
+                onChange={(e) => handleChange(isEditMode ? field.initialValue : field.name, e.target?.value ?? e)}
+
                 // value={formData[field.name] ?? ""}
                 // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
                 // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
@@ -118,7 +147,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                     ? getNestedValue(formData, field.initialValue)
                       ? "Yes"
                       : "No"
-                    : getNestedValue(formData, field.initialValue) || formData[field.name] || ""
+                    : getNestedValue(formData, field.initialValue) ?? formData[field.name] ?? ""
                 }
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
@@ -155,16 +184,40 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 required={field.required}
                 placeholder={field.placeholder}
                 optionLabel={field.optionLabel}
-                onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
+                // onChange={(e) => handleChange(field.name, e.target?.value ?? e)}
+                onChange={(e) => handleChange(isEditMode ? field.initialValue : field.name, e.target?.value ?? e)}
+
                 // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
                 // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
-                value={
-                  typeof getNestedValue(formData, field.initialValue) === "boolean"
-                    ? getNestedValue(formData, field.initialValue)
-                      ? "Yes"
-                      : "No"
-                    : getNestedValue(formData, field.initialValue) || formData[field.name] || ""
-                }
+                // value={
+                //   getNestedValue(formData, field.initialValue) !== undefined
+                //     ? typeof getNestedValue(formData, field.initialValue) === "boolean"
+                //       ? getNestedValue(formData, field.initialValue) ? "Yes" : "No"
+                //       : getNestedValue(formData, field.initialValue)
+                //     : formData[field.name] ?? ""
+                // }
+                value={(() => {
+
+                  if(!isEditMode){
+                    return formData[field?.name]
+                  }
+                  const value = 
+                    typeof getNestedValue(formData, field.initialValue) === "boolean"
+                      ? getNestedValue(formData, field.initialValue) 
+                        ? "Yes" 
+                        : "No"
+                      : getNestedValue(formData, field.initialValue) 
+                        || formData?.[field.initialValue] 
+                        || formData?.[field.name] 
+                        || initailValues?.[field.name]
+                        || "";
+                        // {field.name === "manufacturers" && console.log("hitt brooo");}
+              
+                        // {field.hasSearch && console.log(`Field: ${field.name}, Has Search: ${field?.hasSearch}, Value:`, value); }
+                        // console.log(`Field: ${field.name}, Value:`, value);   
+                  return value;
+                })()}
+
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}

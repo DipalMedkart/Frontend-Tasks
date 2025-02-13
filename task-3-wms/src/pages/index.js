@@ -20,4 +20,5 @@ import auth from "@/hoc/auth";
     </>
   )
 }
-export default auth(Home)
+// export default auth(Home)
+export default Home

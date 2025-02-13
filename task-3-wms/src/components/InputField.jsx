@@ -198,7 +198,7 @@ export const InputField = ({
           >
             <option value=""></option>
             {selectionOptions.map((option, index) => (
-              <option key={index} value={option.value ?? option}>
+              <option key={index} value={ option.value ?? option}>
                 {option.key ?? option}
               </option>
             ))}

@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_REQUEST, SET_FILTER_OPTION, SET_SEARCH_OPTION, SET_SEARCH_TERM, SET_SORT_OPTION, SET_SORT_ORDER, SET_CURRENT_PAGE } from "../constant";
+import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_REQUEST, SET_FILTER_OPTION, SET_SEARCH_OPTION, SET_SEARCH_TERM, SET_SORT_OPTION, SET_SORT_ORDER, SET_CURRENT_PAGE , UPDATE_PRODUCT_REQUEST} from "../constant";
 
 export const fetchProductRequest = (page, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token) => {
 
@@ -54,3 +54,4 @@ export const setSortOrder = (order) => ({
     type: SET_SORT_ORDER,
     payload: order === "ascending" ? "a" : "d",
 });
+

@@ -83,7 +83,7 @@ const AddProduct = () => {
       <div className="py-2 mt-2">
 
 
-        <CommonForm title="Add Product" titleButton={titleButton} JSONData={formJSON} handleChange={handleChange} handleSelectedSection={handleSelectedSection} selectedType={selectedType} buttons={buttons} onFormSubmit={handleSubmit} />
+        <CommonForm title="Add Product" titleButton={titleButton} JSONData={formJSON} handleChange={handleChange} handleSelectedSection={handleSelectedSection} selectedType={selectedType} buttons={buttons} onFormSubmit={handleSubmit} formData={formData}/>
       </div>
     </div>
   );

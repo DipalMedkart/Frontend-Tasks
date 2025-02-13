@@ -15,7 +15,7 @@ const ProductMaster = () => {
     const dispatch = useDispatch()
     const products = useSelector((state) => state.prod.products)
     const router = useRouter();
-    console.log(products);
+    // console.log(products);
 
     const handleAddClick = () => {
         dispatch(fetchSelectOptionsRequest())
