@@ -34,9 +34,7 @@ const Navbar = () => {
     const handleDropdownClick = (name) => {
         if (name === "Product Master") {
             router.push('/product-master'); 
-            // <Link href="/product-master">
-                
-            // </Link>
+          
         }
 
     };

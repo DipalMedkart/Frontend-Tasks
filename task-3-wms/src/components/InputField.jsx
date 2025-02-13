@@ -56,8 +56,6 @@ export const InputField = ({
     dispatch(fetchFilterOptionsRequest(name, query, true));
 
 
-
-
     let filteredResults = [];
     if (name === "manufacturers") {
       filteredResults = manufacturers
@@ -80,6 +78,8 @@ export const InputField = ({
     }
 
     // console.log("Search Results for", name, ":", filteredResults);
+
+
     // Store results only for the specific input field
     setSearchResults((prev) => ({
       ...prev,
@@ -137,20 +137,6 @@ export const InputField = ({
                 ✕
               </button>
             )}
-            {/* {searchResults[name]?.length > 0 && (
-              <ul className="absolute w-full bg-white border border-gray-200 rounded mt-1 z-10 max-h-40 overflow-auto">
-                
-                {searchResults[name]?.map((option, index) => (
-                  <li
-                    key={index}
-                    className="px-2 py-1 cursor-pointer hover:bg-gray-100 text-black"
-                    onClick={() => handleOptionSelect(option)}
-                  >
-                    {option.name ?? option}
-                  </li>
-                ))}
-              </ul>
-            )} */}
             {searchQueries[name] && (
               <ul className="absolute w-full bg-white border border-gray-200 rounded mt-1 z-10 max-h-40 overflow-auto">
                 {searchResults[name]?.length > 0 ? (

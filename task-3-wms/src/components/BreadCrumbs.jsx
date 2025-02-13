@@ -6,7 +6,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const BreadCrumbs = () => {
   const router = useRouter();
-//   const pathnames = router.pathname.split("/").filter((x) => x);
+
 
   
 const pathnames = router.pathname

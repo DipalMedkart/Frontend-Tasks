@@ -1,7 +1,3 @@
-import { Divide } from "lucide-react";
-import DashboardBar from "@/components/DashboardBar";
-import Navbar from "@/components/Navbar";
-import Layout from "@/components/Layout";
 import { useSelector } from "react-redux";
 import auth from "@/hoc/auth";
 

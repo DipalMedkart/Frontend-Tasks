@@ -34,9 +34,8 @@ const Options = () => {
     const handleSearchChange = (e) => {
         const value = e.target.value
         // console.log(e.target.value);
-        console.log(value);
         dispatch(setSearchTerm(value));
-        console.log(searchTerm);
+        
         // dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
     };
 

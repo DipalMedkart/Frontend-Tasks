@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link';
 import Options from '@/components/Options';
-import ProductsTable from '@/components/ProductsTable';
 import Pagination from '@/components/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSelectOptionsRequest } from '@/redux/actions/selectOptionsAction';
@@ -66,7 +65,7 @@ const ProductMaster = () => {
 
 
                 <Options />
-                {/* <ProductsTable /> */}
+                
                 <Table headers={headers} data={products} />
                 <Pagination />
 

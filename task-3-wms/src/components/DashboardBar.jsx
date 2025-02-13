@@ -78,14 +78,6 @@ const DashboardBar = () => {
                                         Logout
                                     </button>
                                 </Link>
-                                {/* <Link href='/login'>
-                                <button
-                                    className="w-full  text-black font-medium py-2  transition-all hover:bg-gray-200"
-                                    // onClick={handleLogout}
-                                    >
-                                    Logout
-                                </button>
-                                    </Link> */}
                             </div>
                         )}
                     </div>

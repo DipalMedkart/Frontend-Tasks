@@ -6,7 +6,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 const FilterComponent = () => {
     const dispatch = useDispatch();
 
-    // Get filter options and selected filters from Redux
+    
     const { filterOptions, selectedFilters, searchQueries, loading, error } = useSelector((state) => state.filter);
 
 
