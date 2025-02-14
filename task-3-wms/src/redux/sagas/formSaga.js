@@ -102,7 +102,7 @@ function* AddProduct(action) {
         yield put(submitFormSuccess(response.data));
         if (response.status === 200) {
             toast.success("Product added successfully");
-            
+             
         }  
     } catch (error) {
         yield put(submitFormFailure(error.message));
@@ -174,12 +174,18 @@ function* updateProduct(action) {
                 b2c_category: data.sales_category?.b2c_category?.id,
                 sales_trend_category: data.sales_category?.sales_trend_category,
                 is_returnable: data.sales_category?.is_returnable,
-                b2c_in: 0,
-                b2c_out: 120,
-                franchise_in: 180,
-                franchise_out: 210,
-                purchase: 180,
-                purchase_return: 90,
+                // b2c_in: 0,
+                // b2c_out: 120,
+                // franchise_in: 180,
+                // franchise_out: 210,
+                // purchase: 180,
+                // purchase_return: 90,
+                b2c_in : data.sales_category?.b2c_in || 0,
+                b2c_out : data.sales_category?.b2c_out || 120,
+                franchise_in : data.sales_category?.franchise_in || 180,
+                franchise_out : data.sales_category?.franchise_out || 210,
+                purchase : data.sales_category?.purchase || 180,
+                purchase_return : data.sales_category?.purchase_return || 90,
             },
             scheduled_type_code: data.scheduled_type_code,
             taxes: {

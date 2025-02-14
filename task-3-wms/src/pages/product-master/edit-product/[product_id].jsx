@@ -30,7 +30,7 @@ const EditProduct = () => {
 
 
   const buttons = [
-    { name: "SAVE", label: "F9", onClick: () => handleSubmit(), className: "text-[#5556a6] p-2", labelClassName: "p-1.5 bg-[#5556a6] text-white" },
+    { name: "SAVE", label: "F9", onClick: (e) => handleSubmit(e), className: "text-[#5556a6] p-2", labelClassName: "p-1.5 bg-[#5556a6] text-white" },
 
 
   ];
@@ -88,26 +88,27 @@ const EditProduct = () => {
   }
 
 
-  const handleSubmit = () => {
-
-    const updatedData = JSON.parse(JSON.stringify(editFormData));
-
-    dispatch(updateProductRequest({ product_id, data: updatedData }));
-  };
-
   // const handleSubmit = (e) => {
-  //   e.preventDefault()
+  //   e.preventDefault();
 
-  //   const validationErrors = validateForm(editFormData, formJSON, selectedType, selectedSection);
-  //   setErrors(validationErrors);
+  //   const updatedData = JSON.parse(JSON.stringify(editFormData));
 
-  //   if (Object.keys(validationErrors).length === 0) {
-  //     const updatedData = JSON.parse(JSON.stringify(editFormData));
-  //     dispatch(updateProductRequest({ product_id, data: updatedData }));
-  //   } else {
-  //     console.log("Validation failed:", validationErrors);
-  //   }
-  // }
+  //   dispatch(updateProductRequest({ product_id, data: updatedData }));
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const validationErrors = validateForm(editFormData, formJSON, selectedType, selectedSection);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      const updatedData = JSON.parse(JSON.stringify(editFormData));
+      dispatch(updateProductRequest({ product_id, data: updatedData }));
+    } else {
+      console.log("Validation failed:", validationErrors);
+    }
+  }
 
   const handleSelectedSection = (sectionName) => {
     dispatch(setSelectedSection(sectionName))

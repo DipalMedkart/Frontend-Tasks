@@ -118,7 +118,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 onChange={(e) => handleChange(isEditMode ? field.initialValue : field.name, e.target?.value ?? e)}
 
                 // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
-                // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
+                
                 value={
                   typeof getNestedValue(formData, field.initialValue) === "boolean"
                     ? getNestedValue(formData, field.initialValue)
@@ -129,7 +129,8 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
-                error={errors?.[field?.name] || ""}
+                // error={errors?.[field?.initialValue] || errors?.[field?.name] || ""}
+                error={isEditMode ? errors?.[field?.initialValue] || errors?.[field?.name] || "" : errors?.[field?.name] || ""}
 
               />
             ))}
@@ -159,7 +160,9 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
-                error={errors?.[field?.name] || ""}
+                // error={errors?.[field?.initialValue] || errors?.[field?.name] || ""}
+                error={isEditMode ? errors?.[field?.initialValue] || errors?.[field?.name] || "" : errors?.[field?.name] || ""}
+
               />
             ))}
           </div>
@@ -196,14 +199,8 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 onChange={(e) => handleChange(isEditMode ? field.initialValue : field.name, e.target?.value ?? e)}
 
                 // value={formData[field.initialValue] ?? formData[field.name] ?? ""}
-                // value={getNestedValue(formData, field.initialValue) || formData[field.name] || ""}
-                // value={
-                //   getNestedValue(formData, field.initialValue) !== undefined
-                //     ? typeof getNestedValue(formData, field.initialValue) === "boolean"
-                //       ? getNestedValue(formData, field.initialValue) ? "Yes" : "No"
-                //       : getNestedValue(formData, field.initialValue)
-                //     : formData[field.name] ?? ""
-                // }
+                
+               
                 value={(() => {
 
                   if(!isEditMode){
@@ -219,17 +216,16 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                         || formData?.[field.name] 
                         || initailValues?.[field.name]
                         || "";
-                        // {field.name === "manufacturers" && console.log("hitt brooo");}
-              
-                        // {field.hasSearch && console.log(`Field: ${field.name}, Has Search: ${field?.hasSearch}, Value:`, value); }
-                        // console.log(`Field: ${field.name}, Value:`, value);   
+                      
                   return value;
                 })()}
 
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
-                error={errors?.[field?.name] || ""}
+                
+                
+                error={isEditMode ? errors?.[field?.initialValue] || errors?.[field?.name] || "" : errors?.[field?.name] || ""}
               />
             ))}
 

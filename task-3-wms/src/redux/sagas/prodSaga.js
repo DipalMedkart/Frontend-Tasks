@@ -27,12 +27,6 @@ function* fetchProducts(action) {
         if (page) {
             params.append('page', page);
         }
-        // if (filterBy) {
-        //     params.append('filter_by', filterBy);
-        // }
-        // if (searchQuery) {
-        //     params.append('search', `${searchQuery},${searchOption}`);
-        // }
         if (searchTerm) {
             params.append('search', `${searchTerm},${searchOption}`);
         }

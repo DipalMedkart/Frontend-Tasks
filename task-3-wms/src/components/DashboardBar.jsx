@@ -54,6 +54,8 @@ const DashboardBar = () => {
 
 
                         {isOpen && (
+                            
+
                             <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-300 rounded-lg shadow-lg z-50 p-4">
 
                                 <div className="flex items-center justify-center w-14 h-14 mx-auto bg-[#5556a6] text-lg font-bold rounded-full">
@@ -67,7 +69,7 @@ const DashboardBar = () => {
 
                                 <button
                                     className="w-full  text-gray-800 font-medium py-2 mt-3  transition-all hover:bg-gray-200"
-                                >
+                                    >
                                     Profile
                                 </button>
 
@@ -80,6 +82,7 @@ const DashboardBar = () => {
                                     </button>
                                 </Link>
                             </div>
+                        
                         )}
                     </div>
                 )}
