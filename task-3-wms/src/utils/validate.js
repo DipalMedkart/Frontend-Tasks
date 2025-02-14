@@ -56,10 +56,9 @@
 //   return errors;
 // };
 
-export const validateForm = (formData, JSONData, selectedType, selectedSection) => {
+export const validateForm = (formData, JSONData, selectedType, selectedSection, isEditMode) => {
   let errors = {};
 
-  
   const getNestedValue = (obj, path) => {
     return path?.split(".").reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : ""), obj);
   };
@@ -73,11 +72,14 @@ export const validateForm = (formData, JSONData, selectedType, selectedSection) 
 
   allFields.forEach(field => {
     if (field.required) {
-  
-      let fieldValue = getNestedValue(formData, field.initialValue) ?? formData[field.name];
+      let fieldValue;
 
-      if (field.name === "manufacturers") {
-        fieldValue = formData["manufacturers"] ?? fieldValue;
+      if (isEditMode) {
+        // 🔹 In edit mode, check `initialValue` (nested structure)
+        fieldValue = getNestedValue(formData, field.initialValue) ?? formData[field.name];
+      } else {
+        // 🔹 In add mode, check only `name`
+        fieldValue = formData[field.name];
       }
 
       if (!fieldValue || fieldValue === "") {
@@ -88,3 +90,4 @@ export const validateForm = (formData, JSONData, selectedType, selectedSection) 
 
   return errors;
 };
+

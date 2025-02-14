@@ -125,6 +125,23 @@ function* updateProduct(action) {
         console.log("Edit form data");
         console.log(data);
 
+        const booleanFields = ["is_active",
+            "is_assured",
+            "is_banned",
+            "is_chronic",
+            "is_discontinued",
+            "is_hidden_from_alternate_products",
+            "is_refrigerated",
+            "is_rx_required",
+            "can_sell_online"];
+
+
+        booleanFields.forEach((key) => {
+            if (typeof data[key] === "string") {
+                data[key] = data[key] === "Yes";
+            }
+        });
+
         const optimizedEditFormData = {
 
             product_name: data.product_name,

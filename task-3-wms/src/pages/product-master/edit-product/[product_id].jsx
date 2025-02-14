@@ -99,7 +99,7 @@ const EditProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const validationErrors = validateForm(editFormData, formJSON, selectedType, selectedSection);
+    const validationErrors = validateForm(editFormData, formJSON, selectedType, selectedSection, true);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {

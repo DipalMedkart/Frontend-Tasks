@@ -275,13 +275,7 @@
                         "name": "gst_type",
                         "required": true,
                         "type": "select",
-                        "providedOptions" : [
-                            {"key" : "0%", "value" : "0%"},
-                            {"key" : "5%", "value" : "5%"},
-                            {"key" : "10%", "value" :"10%"},
-                            {"key" : "12%", "value" : "12%"},
-                            {"key" : "15%", "value" : "15%"}
-                        ],
+                       "optionLabel" : "gst_type",
                         "initialValue" : "taxes.gst_type"
                     },
                     {

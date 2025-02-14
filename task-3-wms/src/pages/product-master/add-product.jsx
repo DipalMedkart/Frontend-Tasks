@@ -57,7 +57,7 @@ const AddProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    const validationErrors = validateForm(formData, formJSON, selectedType, selectedSection);
+    const validationErrors = validateForm(formData, formJSON, selectedType, selectedSection, false);
     setErrors(validationErrors); 
   
     if (Object.keys(validationErrors).length === 0) {

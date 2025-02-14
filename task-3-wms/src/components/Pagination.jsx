@@ -14,9 +14,6 @@ const Pagination = () => {
     const selectedFilters = useSelector((state) => state.filter.selectedFilters);
     const searchOption = useSelector((state) => state.prod.searchOption);
 
-
-
-
     const { isAssured, isRegistered, status, manufacturers, molecules } = selectedFilters;
 
     const filterOptions = {
@@ -83,7 +80,7 @@ const Pagination = () => {
             >
                 {page}
             </button>
-        ));
+        ));  
     }
     return (
         <>
