@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSearchOption, setSearchTerm, setFilterOptions, fetchProductRequest, setSortOption, setCurrentPage, setSortOrder } from '@/redux/actions/prodAction'
+
 import { useState } from 'react'
 import FilterComponent from './FilterComponent'
 import Filter from './Filter'
@@ -35,6 +36,7 @@ const Options = () => {
         const value = e.target.value
         // console.log(e.target.value);
         dispatch(setSearchTerm(value));
+        dispatch(setCurrentPage(1))
         
         // dispatch(fetchProductRequest(currentPage, sortOption, sortOrder, filterOptions, searchTerm, searchOption, token));
     };

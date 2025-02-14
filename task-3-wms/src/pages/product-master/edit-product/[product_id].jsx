@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import formJSON from '../../../data/formData'
 import auth from '@/hoc/auth';
 import { submitFormRequest } from '@/redux/actions/formAction';
-import {produce} from "immer"
+import { produce } from "immer"
+import { validateForm } from '@/utils/validate';
 
 
 
@@ -18,7 +19,8 @@ const EditProduct = () => {
   const [editFormData, setEditFormData] = useState({});
   const formData = useSelector((state) => state.form.formData);
   const loading = useSelector((state) => state.form.loading);
-
+  const [errors, setErrors] = useState({});
+  const selectedSection = useSelector((state) => state.form.selectedSection);
   const { product_id } = router.query;
 
   const handleClose = () => {
@@ -44,7 +46,7 @@ const EditProduct = () => {
   }, [product_id])
   // console.log(code);
 
-  
+
   console.log(formData);
 
   // console.log(formData.manufacturer);
@@ -52,66 +54,73 @@ const EditProduct = () => {
 
   useEffect(() => {
     if (formData) {
-      setEditFormData(JSON.parse(JSON.stringify(formData))); 
+      setEditFormData(JSON.parse(JSON.stringify(formData)));
     }
   }, [formData]);
-  
 
-  
-  
-  
-  
+
   const selectedType = formData.product_type;
   console.log(selectedType);
-  
-  
 
-  
 
-const setNestedValue = (object, path, value) => {
-  if (!path) return object;
+  const setNestedValue = (object, path, value) => {
+    if (!path) return object;
 
-  return produce(object, (draft) => {
-    const keys = path.split(".");
-    let temp = draft; // Work on a draft copy
+    return produce(object, (draft) => {
+      const keys = path.split(".");
+      let temp = draft;
 
-    for (let i = 0; i < keys.length - 1; i++) {
-      if (!temp[keys[i]] || typeof temp[keys[i]] !== "object") {
-        temp[keys[i]] = {}; // Ensure nested objects exist
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (!temp[keys[i]] || typeof temp[keys[i]] !== "object") {
+          temp[keys[i]] = {};
+        }
+        temp = temp[keys[i]];
       }
-      temp = temp[keys[i]];
-    }
 
-    temp[keys[keys.length - 1]] = value; // Set the final value
-  });
-};
+      temp[keys[keys.length - 1]] = value;
+    });
+  };
 
 
   const handleChange = (initialValue, value) => {
     setEditFormData((prev) => setNestedValue(prev, initialValue, value));
     // dispatch(updateField(initialValue, value));
   }
-    
-    
-    const handleSubmit = () => {
-      
-      const updatedData = JSON.parse(JSON.stringify(editFormData)); // Deep copy
-    
+
+
+  const handleSubmit = () => {
+
+    const updatedData = JSON.parse(JSON.stringify(editFormData));
+
     dispatch(updateProductRequest({ product_id, data: updatedData }));
-    };
-    
-    const handleSelectedSection = (sectionName) => {
-      dispatch(setSelectedSection(sectionName))
-    }
-    
-    useEffect(() => {
-      console.log(editFormData);
-    },[editFormData])
-    
-    
-    if (loading || !editFormData) {
-      return <div>Loading...</div>; 
-    }
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+
+  //   const validationErrors = validateForm(editFormData, formJSON, selectedType, selectedSection);
+  //   setErrors(validationErrors);
+
+  //   if (Object.keys(validationErrors).length === 0) {
+  //     const updatedData = JSON.parse(JSON.stringify(editFormData));
+  //     dispatch(updateProductRequest({ product_id, data: updatedData }));
+  //   } else {
+  //     console.log("Validation failed:", validationErrors);
+  //   }
+  // }
+
+  const handleSelectedSection = (sectionName) => {
+    dispatch(setSelectedSection(sectionName))
+  }
+
+  useEffect(() => {
+    console.log(editFormData);
+  }, [editFormData])
+
+
+  if (loading || !editFormData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className='w-10/12 mx-auto'>
@@ -120,7 +129,7 @@ const setNestedValue = (object, path, value) => {
       <div className="py-2 mt-2">
 
 
-        <CommonForm title="Edit Product" initailValues={editFormData} JSONData={formJSON} buttons={buttons} titleButton={titleButton} handleChange={handleChange} onFormSubmit={handleSubmit} selectedType={selectedType} handleSelectedSection={handleSelectedSection} formData={editFormData}/>
+        <CommonForm title="Edit Product" initailValues={editFormData} JSONData={formJSON} buttons={buttons} titleButton={titleButton} handleChange={handleChange} errors={errors} onFormSubmit={handleSubmit} selectedType={selectedType} handleSelectedSection={handleSelectedSection} formData={editFormData} />
       </div>
     </div>
   )

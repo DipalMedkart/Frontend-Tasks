@@ -25,12 +25,6 @@ const Navbar = () => {
         
     ];
 
-
-    const handleButtonClick = (name) => {
-        console.log(`${name} clicked!`);
-
-    };
-
     const handleDropdownClick = (name) => {
         if (name === "Product Master") {
             router.push('/product-master'); 

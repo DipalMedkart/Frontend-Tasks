@@ -5,6 +5,7 @@ import { UPDATE_PRODUCT_REQUEST } from "../constant";
 import axiosInstance from "@/utils/axioseInstance";
 import { BASIC_URL } from "../constant";
 import { toast } from "react-toastify";
+import { Router } from "next/router";
 
 function* AddProduct(action) {
     try {
@@ -99,10 +100,10 @@ function* AddProduct(action) {
 
         const response = yield call(axiosInstance.post, `${BASIC_URL}/master/products`, optimizedFormData);
         yield put(submitFormSuccess(response.data));
-        if (response.code === 200) {
+        if (response.status === 200) {
             toast.success("Product added successfully");
-        }
-
+            
+        }  
     } catch (error) {
         yield put(submitFormFailure(error.message));
         console.log(error.response?.data || error.message);
@@ -196,7 +197,7 @@ function* updateProduct(action) {
 
         const response = yield call(axiosInstance.put, `${BASIC_URL}/master/products/${product_id}`, optimizedEditFormData);
         yield put({ type: "UPDATE_PRODUCT_SUCCESS", payload: response.data });
-        if(response.code === 200){
+        if(response.status === 200){
             yield put(resetForm())
             toast.success("Product updated successfully!");
             
