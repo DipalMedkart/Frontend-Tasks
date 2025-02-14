@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import { submitFormRequest } from '@/redux/actions/formAction';
 import { useRouter } from 'next/router';
 import auth from '@/hoc/auth';
+import { validateForm } from '@/utils/validate';
 
 
 
@@ -25,6 +26,7 @@ const AddProduct = () => {
   const error = useSelector((state) => state.form.error);
   const selectedSection = useSelector((state) => state.form.selectedSection);
   const router = useRouter()
+  const [errors, setErrors] = useState({});  
 
   
 
@@ -37,6 +39,7 @@ const AddProduct = () => {
   }, [])
 
 
+
   const handleChange = (name, value) => {
 
     dispatch(updateField(name, value));
@@ -46,20 +49,35 @@ const AddProduct = () => {
     dispatch(setSelectedSection(sectionName))
   }
 
-  const handleSubmit = () => {
+  // const handleSubmit = () => {
 
-    dispatch(submitFormRequest(formData))
+  //   dispatch(submitFormRequest(formData))
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    const validationErrors = validateForm(formData, formJSON, selectedType, selectedSection);
+    setErrors(validationErrors); 
+  
+    if (Object.keys(validationErrors).length === 0) {
+      dispatch(submitFormRequest(formData)); 
+    } else {
+      console.log("Validation failed:", validationErrors);
+    }
   };
+  
 
   const handleReset = () => {
     router.push('/product-master')
     dispatch(resetForm());
+    setErrors({})
   };
 
   // let loading = true;
 
   const buttons = [
-    { name: "SAVE", label: "F9", onClick: () => handleSubmit(), className: "text-[#5556a6] p-2", labelClassName: "p-1.5 bg-[#5556a6] text-white" },
+    { name: "SAVE", label: "F9", onClick: (e) => handleSubmit(e), className: "text-[#5556a6] p-2", labelClassName: "p-1.5 bg-[#5556a6] text-white" },
 
   ];
 
@@ -83,7 +101,7 @@ const AddProduct = () => {
       <div className="py-2 mt-2">
 
 
-        <CommonForm title="Add Product" titleButton={titleButton} JSONData={formJSON} handleChange={handleChange} handleSelectedSection={handleSelectedSection} selectedType={selectedType} buttons={buttons} onFormSubmit={handleSubmit} formData={formData}/>
+        <CommonForm title="Add Product" titleButton={titleButton} JSONData={formJSON} handleChange={handleChange} handleSelectedSection={handleSelectedSection} selectedType={selectedType} buttons={buttons} onFormSubmit={handleSubmit} formData={formData} errors={errors}/>
       </div>
     </div>
   );

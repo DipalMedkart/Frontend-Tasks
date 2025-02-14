@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 
 
 
-const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, handleSelectedSection, buttons, onFormSubmit, initailValues, formData }) => {
+const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, handleSelectedSection, buttons, onFormSubmit, initailValues, formData, errors }) => {
 
 
   const dispatch = useDispatch();
@@ -62,6 +62,8 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
 
   //   return path?.split('.').reduce((acc, key) => acc?.[key], object) ?? "";
   // };
+
+  
 
 
   const getNestedValue = (object, path) => {
@@ -127,6 +129,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
+                error={errors?.[field?.name] || ""}
 
               />
             ))}
@@ -156,6 +159,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
+                error={errors?.[field?.name] || ""}
               />
             ))}
           </div>
@@ -225,6 +229,7 @@ const CommonForm = ({ title, titleButton, JSONData, handleChange, selectedType, 
                 providedOptions={field.providedOptions}
                 hasSearch={field?.hasSearch}
                 isDisbaled={field?.disable}
+                error={errors?.[field?.name] || ""}
               />
             ))}
 

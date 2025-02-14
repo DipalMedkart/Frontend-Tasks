@@ -57,4 +57,4 @@ export const fetchProductDetailsFailure = (error) => ({
 export const updateProductRequest = ({product_id,data}) => ({
     type: UPDATE_PRODUCT_REQUEST,
     payload: {product_id,data},
-});
+});  

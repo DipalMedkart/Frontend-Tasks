@@ -19,6 +19,7 @@ export const InputField = ({
   hasSearch = false,
   multiSelect = false,
   isDisbaled = false,
+  error,
 
 
 }) => {
@@ -122,7 +123,11 @@ export const InputField = ({
           <div className="relative w-7/12">
             <input
               type="text"
-              className={`w-full text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10 ${isDisbaled ? "bg-[#E9ECEF] cursor-not-allowed" : "bg-white"}`}
+              className={`w-full text-black border ${
+                error ? "border-red-500" : "border-gray-200"
+              } rounded px-2 py-1 focus:outline-none h-10 ${
+                isDisbaled ? "bg-[#E9ECEF] cursor-not-allowed" : "bg-white"
+              }`}
               placeholder={placeholder || "Search..."}
               onChange={handleSearchChange}
               value={selectedFieldValue?.name || searchQueries[name] || ""}
@@ -155,7 +160,7 @@ export const InputField = ({
               </ul>
             )}
 
-            <div className="mt-2 flex flex-wrap">
+            {/* <div className="mt-2 flex flex-wrap">
               {multiSelect && selectedOptions.length > 0 && (
                 <div className="mt-2 flex flex-wrap">
                   {selectedOptions.map((option, index) => (
@@ -171,11 +176,15 @@ export const InputField = ({
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         ) : type === 'select' ? (
           <select
-            className={`w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10 ${isDisbaled ? "bg-[#E9ECEF] cursor-not-allowed" : "bg-white"}`}
+          className={`w-7/12 text-black border ${
+            error ? "border-red-500" : "border-gray-200"
+          } rounded px-2 py-1 focus:outline-none h-10 ${
+            isDisbaled ? "bg-[#E9ECEF] cursor-not-allowed" : "bg-white"
+          }`}
             value={value}
             onChange={(e) => {
               onChange && onChange(e.target.value);
@@ -192,7 +201,11 @@ export const InputField = ({
         ) : (
           <input
             type={type}
-            className={`w-7/12 text-black border border-gray-200 rounded px-2 py-1 focus:outline-none h-10 ${isDisbaled ? "bg-[#E9ECEF] cursor-not-allowed" : "bg-white"}`}
+            className={`w-7/12 text-black border ${
+              error ? "border-red-500" : "border-gray-200"
+            } rounded px-2 py-1 focus:outline-none h-10 ${
+              isDisbaled ? "bg-[#E9ECEF] cursor-not-allowed" : "bg-white"
+            }`}
             placeholder={placeholder}
             required={required}
             name={name}
@@ -203,6 +216,7 @@ export const InputField = ({
             disabled={isDisbaled}
           />
         )}
+        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { logoutRequest } from '@/redux/actions/authAction';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { persistor } from '@/redux/store';
+import { Menu, MenuItem, Avatar, Button } from "@mui/material";
 
 const DashboardBar = () => {
     const name = useSelector((state) => state.auth.user?.name);

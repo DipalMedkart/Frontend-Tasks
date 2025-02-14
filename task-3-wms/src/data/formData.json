@@ -21,7 +21,7 @@
             {
                 "label": "Wondersoft Code",
                 "name": "ws_code",
-                "required": true,
+                
                 "type": "number",
                 "placeholder": "Wondersoft Code",
                 "disable" : true,
@@ -31,7 +31,7 @@
             {
                 "label": "Product Code",
                 "name": "product_code",
-                "required": true,
+                
                 "type": "number",
                 "placeholder": "Product Code",
                 "disable" : true,
